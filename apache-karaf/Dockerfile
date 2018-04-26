@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends jq curl vim les
     && mkdir -p /opt/karaf/data /opt/karaf/data/log \
     && mkdir -p /root/.m2/repository \
     && sed -i 's/log4j\.rootLogger=INFO,\ out,\ osgi\:\*/log4j\.rootLogger=INFO,\ out,\ stdout,\ osgi\:\*/' /opt/karaf/etc/org.ops4j.pax.logging.cfg \
+    && echo "org.ops4j.pax.web.session.timeout=30" >> /opt/karaf/etc/org.ops4j.pax.web.cfg \
     && rm -rf /var/lib/apt/lists/*
 
 COPY start.sh /start.sh
