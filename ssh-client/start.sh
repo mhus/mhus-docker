@@ -3,6 +3,6 @@
 while [ 1 = 1 ]
 do
   echo "Connect $@"
-  /usr/bin/ssh $@
+  /usr/bin/ssh -o "ConnectTimeout 3" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" $@
   sleep 1
 done
