@@ -15,6 +15,7 @@ run chmod u+x /start.sh \
  && yes "asd123_$RANDOM$RANDOM" | passwd client \
  && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
  && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
+ && echo 'GatewayPorts yes' >> /etc/ssh/sshd_config \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
