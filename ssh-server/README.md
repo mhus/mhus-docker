@@ -10,5 +10,10 @@ Create
 
 Usage
 
-docker run -it -d -p 1022:22 -v /mnt/storage/ssh/server:/ssh --name ssh-server ssh-server
+docker run -it -d -p 1022:22 -v $storage:/ssh --name ssh-server ssh-server
+ 
+ Start ssh client
+ 
+ ssh -i $storage/id_rsa -p 1022 client@localhost
+ 
  
