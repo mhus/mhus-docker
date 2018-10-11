@@ -20,4 +20,4 @@ cp /ssh/* /home/client/.ssh
 chmod 600 /home/client/.ssh/*
 chown -R client /home/client/.ssh
 
-/usr/sbin/sshd -D $@
+/usr/sbin/sshd -D -d $@
