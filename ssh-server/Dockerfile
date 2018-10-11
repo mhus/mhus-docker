@@ -6,11 +6,12 @@ RUN apt-get update \
  && apt-get install -y openssh-server
 
 COPY start.sh /
+COPY ping.sh /
 
 run chmod u+x /start.sh \
+ && chmod 777 /ping.sh \
  && mkdir /var/run/sshd \
- && echo "/bin/ping" >> /etc/shells \
- && useradd -ms /bin/ping client \
+ && useradd -ms /ping.sh client \
  && yes "asd123_$RANDOM$RANDOM" | passwd client \
  && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
  && echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config \
