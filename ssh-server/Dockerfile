@@ -2,13 +2,12 @@ FROM       debian:9
 MAINTAINER Mike Hummel <mh@mhus.de>
 # https://github.com/rastasheep/ubuntu-sshd
 
-RUN apt-get update \
- && apt-get install -y openssh-server
-
 COPY start.sh /
 COPY ping.sh /
 
-run chmod u+x /start.sh \
+RUN apt-get update \
+ && apt-get install -y openssh-server nano \
+ && chmod u+x /start.sh \
  && chmod 777 /ping.sh \
  && mkdir /var/run/sshd \
  && useradd -ms /ping.sh client \

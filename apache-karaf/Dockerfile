@@ -6,7 +6,7 @@ RUN curl -q -L -C - -b "oraclelicense=accept-securebackup-cookie" -o /tmp/jce_po
     && unzip -oj -d /usr/lib/jvm/java-8-oracle/jre/lib/security /tmp/jce_policy-8.zip \*/\*.jar \
     && rm /tmp/jce_policy-8.zip
 
-#ENV KARAF_UID 0
+ENV KARAF_UID 1000
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV KARAF_VERSION 4.0.10
 ENV JAVA_MAX_MEM 2048m
