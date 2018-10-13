@@ -1,18 +1,25 @@
 #!/bin/bash
 
-FILEBEAT_CONFIG=/filebeat.yml
+if [ "x$RUNTIME_ENV" == "x" ]; then
+  RUNTIME_ENV=/root/.m2/${APP_NAME}_env.sh
+fi
+if [ "x$FILEBEAT_CONFIG" == "x" ]; then
+  FILEBEAT_CONFIG=/opt/karaf/filebeat_logstash.yml
+fi
 
-. /root/.m2/${APP_NAME}_env.sh
 cd /opt/karaf
 
-while [ "x$START_WAIT" == "x1" ]; do
-  echo "START_WAIT is set ... waiting"
-  sleep 10
-  . /root/.m2/${APP_NAME}_env.sh
-done
-if [ "x$START_BASH" == "x1" ]; then
-  /bin/bash
-  exit
+if [ -e $RUNTIME_ENV ];
+	. $RUNTIME_ENV
+	while [ "x$START_WAIT" == "x1" ]; do
+	  echo "START_WAIT is set ... waiting"
+	  sleep 10
+	  . $RUNTIME_ENV
+	done
+	if [ "x$START_BASH" == "x1" ]; then
+	  /bin/bash
+	  exit
+	fi
 fi
 if [ "x$START_REINSTALL" == "x1" ]; then
   rm installdone.mark
