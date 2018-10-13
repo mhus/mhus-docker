@@ -12,6 +12,7 @@ ENV APP_NAME app
 COPY download.sh /tmp/download.sh
 COPY start.sh /
 COPY install.go /
+COPY karaf /opt/karaf/
 
 RUN echo ">>> Install the Java JCE Policy" \
     && curl -q -L -C - -b "oraclelicense=accept-securebackup-cookie" -o /tmp/jce_policy-8.zip -O http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip \
@@ -26,7 +27,6 @@ RUN echo ">>> Install the Java JCE Policy" \
     && rm /tmp/apache-karaf.tar.gz \
     && mkdir -p /opt/karaf/data /opt/karaf/data/log \
     && mkdir -p /root/.m2/repository \
-    && sed -i 's/log4j\.rootLogger=INFO,\ out,\ osgi\:\*/log4j\.rootLogger=INFO,\ stdout/' /opt/karaf/etc/org.ops4j.pax.logging.cfg \
 	&& echo ">>> Prepare start" \
 	&& chmod u+x /start.sh \
 	&& echo ">>> Cleanup" \
