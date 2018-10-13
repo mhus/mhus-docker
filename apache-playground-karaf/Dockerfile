@@ -11,7 +11,6 @@ ENV FILEBEAT_VERSION=6.2.3 \
 
 COPY download.sh /tmp/download.sh
 COPY start.sh /
-COPY karaf /opt/karaf/
 
 RUN set -x \
     && echo ">>> Install the Java JCE Policy" \
@@ -41,6 +40,8 @@ RUN set -x \
 	&& rm -r /root/.m2/* \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY karaf /opt/karaf/
 
 EXPOSE 8181
 
