@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FILEBEAT_CONFIG=/filebeat.yml
+
 . /root/.m2/${APP_NAME}_env.sh
 cd /opt/karaf
 
@@ -14,6 +16,10 @@ if [ "x$START_BASH" == "x1" ]; then
 fi
 if [ "x$START_REINSTALL" == "x1" ]; then
   rm installdone.mark
+fi
+if [ "x$START_FILEBEAT" == "x1" ]; then
+  /bin/filebeat -e -c $FILEBEAT_CONFIG run &
+  sleep 1
 fi
 
 # install 
