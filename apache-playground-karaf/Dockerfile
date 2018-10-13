@@ -3,11 +3,11 @@ MAINTAINER Mike Hummel <mh@mhus.de>
 
 ENV FILEBEAT_VERSION=6.2.3 \
     FILEBEAT_SHA1=9c87d44e47fb2e48f9d772449a72de5148d83b2e906ec673e4832d2d284ecc9643a6ca4df6600d30b79558c2ca233b94a88c2a3e4e195f2d396bdbbdcf4b6689 \
-    JAVA_HOME /usr/lib/jvm/java-8-oracle \
-    KARAF_VERSION 4.0.10 \
-    JAVA_MAX_MEM 2048m \
-    KARAF_EXEC exec \
-    APP_NAME app
+    JAVA_HOME=/usr/lib/jvm/java-8-oracle \
+    KARAF_VERSION=4.0.10 \
+    JAVA_MAX_MEM=2048m \
+    KARAF_EXEC=exec \
+    APP_NAME=app
 
 COPY download.sh /tmp/download.sh
 COPY start.sh /
