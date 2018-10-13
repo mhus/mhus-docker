@@ -6,8 +6,7 @@ ENV KARAF_UID 1000
 RUN set -x \
  && echo ">>> Install" \
  && useradd -u $KARAF_UID -ms /start.sh karaf \
- && chown -R $KARAF_UID /opt/karaf/data \
- && chown -R $KARAF_UID /opt/karaf/instances \
+ && chown -R $KARAF_UID /opt/karaf \
  && mkdir -p /home/karaf/.m2/repository \
  && chown -R karaf /home/karaf/.m2/repository \
  && chmod ugo+x /start.sh
