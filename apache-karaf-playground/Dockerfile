@@ -42,6 +42,7 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY karaf /opt/karaf/
+COPY filebeat /
 
 EXPOSE 8181
 

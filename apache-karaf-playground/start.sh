@@ -4,12 +4,12 @@ if [ "x$RUNTIME_ENV" == "x" ]; then
   RUNTIME_ENV=/root/.m2/${APP_NAME}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
-  FILEBEAT_CONFIG=/opt/karaf/filebeat_logstash.yml
+  FILEBEAT_CONFIG=/logstash.yml
 fi
 
 cd /opt/karaf
 
-if [ -e $RUNTIME_ENV ];
+if [ -e $RUNTIME_ENV ]; then
 	. $RUNTIME_ENV
 	while [ "x$START_WAIT" == "x1" ]; do
 	  echo "START_WAIT is set ... waiting"
