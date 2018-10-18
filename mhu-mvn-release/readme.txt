@@ -1,7 +1,7 @@
 
 Start:
 
-docker run -it --name mhu-mvn-release -v /$PATH_GNUPG_INSTALL:/root/.gnupg mhu-mvn-release
+docker run -it --name mhu-mvn-release -h mhus mhu-mvn-release
 
 you can share a local maven repository, add
  -v /$PATH_M2:/root/.m2
@@ -9,4 +9,9 @@ you can share a local maven repository, add
  and you can share the sources, add
   -v /$PATH_DEPLOY:/deploy
 
-docker run -it --name mhu-mvn-release -v /$PATH_DEPLOY:/deploy -v /$PATH_M2:/root/.m2 -v /$PATH_GNUPG_INSTALL:/root/.gnupg mhu-mvn-release
+docker run -it --name mhu-mvn-release -h mhus -v $PATH_DEPLOY:/deploy -v $PATH_M2:/root/.m2 -v $PATH_GNUPG_INSTALL:/root/.gnupg mhu-mvn-release
+
+Install Keys:
+
+gpg --import gpg_secret_keys.asc 
+gpg --import gpg_public_keys.asc

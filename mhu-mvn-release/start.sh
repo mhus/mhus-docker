@@ -9,6 +9,8 @@ echo 6 git commit + tag version
 echo 7 Change Version : mvn versions:set -DnewVersion=....-SNAPSHOT
 echo 8 git commit
 
+export GPG_TTY=$(tty)
 alias ll='ls -l'
+
 cd /deploy
 /bin/bash $@
