@@ -15,7 +15,6 @@ RUN set -x \
 	&& chmod u+x /start.sh \
 	&& mkdir deploy && chmod u+x /deploy.sh \
 	&& echo ">>> Cleanup" \
-	&& rm -r /root/.m2/* \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
