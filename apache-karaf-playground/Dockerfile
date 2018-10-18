@@ -18,7 +18,7 @@ RUN set -x \
     && unzip -oj -d /usr/lib/jvm/java-8-oracle/jre/lib/security /tmp/jce_policy-8.zip \*/\*.jar \
     && rm /tmp/jce_policy-8.zip \
     && echo ">>> Install linux tools" \
-    && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano \
     && echo ">>> Install fileabeat" \
     && wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz -O /opt/filebeat.tar.gz \
     && cd /opt \
