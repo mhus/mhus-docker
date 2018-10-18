@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /root/.m2/crypta_env.sh
+. /root/.m2/mhus_env.sh
 cd /deploy
 
 while [ "x$START_WAIT" == "x1" ]; do
