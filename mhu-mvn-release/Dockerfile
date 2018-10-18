@@ -13,7 +13,7 @@ RUN set -x \
     && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano vim maven \
 	&& echo ">>> Prepare fs" \
 	&& chmod u+x /start.sh \
-	&& mkdir deploy && chmod u+x /deploy.sh
+	&& mkdir deploy && chmod u+x /deploy.sh \
 	&& echo ">>> Cleanup" \
 	&& rm -r /root/.m2/* \
     && apt-get clean \
