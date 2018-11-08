@@ -25,7 +25,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /var/log/*.log
+    - /log/*
     #- c:\programdata\elasticsearch\logs\*
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
@@ -152,7 +152,7 @@ setup.kibana:
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["localhost:5000"]
+  hosts: ["logstash:5000"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications

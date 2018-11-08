@@ -14,3 +14,8 @@ docker exec -it --user root test-kibana /bin/bash
 docker exec -it --user root test-logstash /bin/bash
 
 docker exec -it --user root test-filebeat /bin/bash
+
+
+--- create ---
+
+docker build --build-arg UID=501 -t filebeat .
