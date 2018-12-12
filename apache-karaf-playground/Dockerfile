@@ -2,7 +2,6 @@ FROM committed/java
 MAINTAINER Mike Hummel <mh@mhus.de>
 
 ENV FILEBEAT_VERSION=6.2.3 \
-    FILEBEAT_SHA1=9c87d44e47fb2e48f9d772449a72de5148d83b2e906ec673e4832d2d284ecc9643a6ca4df6600d30b79558c2ca233b94a88c2a3e4e195f2d396bdbbdcf4b6689 \
     JAVA_HOME=/usr/lib/jvm/java-8-oracle \
     KARAF_VERSION=4.0.10 \
     JAVA_MAX_MEM=2048m \
@@ -20,12 +19,12 @@ RUN set -x \
     && echo ">>> Install linux tools" \
     && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano \
     && echo ">>> Install fileabeat" \
-    && wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz -O /opt/filebeat.tar.gz \
     && cd /opt \
-    && echo "${FILEBEAT_SHA1}  filebeat.tar.gz" | sha512sum -c - \
+    && wget --no-check-certificate -O filebeat.tar.gz https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz \
     && tar xzvf filebeat.tar.gz \
-    && cd filebeat-* \
-    && cp filebeat /bin \
+    && rm filebeat.tar.gz \
+    && mv filebeat-${FILEBEAT_VERSION}-linux-x86_64 filebeat \
+    && touch filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.version \
     && cd / \
     && echo ">>> Download and install karaf" \
     && chmod a+x /tmp/download.sh && sync && /tmp/download.sh && rm /tmp/download.sh \

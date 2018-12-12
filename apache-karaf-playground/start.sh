@@ -4,7 +4,7 @@ if [ "x$RUNTIME_ENV" == "x" ]; then
   RUNTIME_ENV=/root/.m2/${APP_NAME}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
-  FILEBEAT_CONFIG=/logstash.yml
+  FILEBEAT_CONFIG=/filebeat/logstash.yml
 fi
 
 cd /opt/karaf
@@ -25,6 +25,7 @@ if [ "x$START_REINSTALL" == "x1" ]; then
   rm installdone.mark
 fi
 if [ "x$START_FILEBEAT" == "x1" ]; then
+  cd /opt/filebeat
   /bin/filebeat -e -c $FILEBEAT_CONFIG run &
   sleep 1
 fi
@@ -57,4 +58,4 @@ fi
 
 # Start Karaf
 
-./bin/karaf
+./bin/karaf $@

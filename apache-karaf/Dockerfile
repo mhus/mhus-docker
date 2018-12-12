@@ -1,7 +1,7 @@
 FROM mhus/apache-karaf-playground:4.0.10
 MAINTAINER Mike Hummel <mh@mhus.de>
 
-ENV KARAF_UID 1000
+ARG KARAF_UID=1000
 
 RUN set -x \
  && echo ">>> Install" \
