@@ -29,6 +29,7 @@ docker run -d -i -p 5000:5000 --link log-elastic:elasticsearch --name log-logsta
 ### Start a filebeat
 
 This filebeat is watching for your local log files
+
 ```
 docker run -d -i --link log-logstash:logstash -v  /var/log:/log --name log-filebeat log-filebeat
 ```
