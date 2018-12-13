@@ -34,7 +34,7 @@ fi
 cd /opt/karaf
 rm instances/instance.properties 
 
-if [ ! -e installdone.mark -a -e /deploy.go ]; then
+if [ ! -e installdone.mark -a -e /deploy.gsh ]; then
     rm -r data/cache/*
     rm data/log/*
     echo "Start karaf in background"
@@ -44,7 +44,7 @@ if [ ! -e installdone.mark -a -e /deploy.go ]; then
 	  echo "."
 	  sleep 5
 	done
-    cat /deploy.go | ./bin/client
+    cat /deploy.gsh | ./bin/client
 	sleep 2
 	echo "Stop karaf"
 	./bin/stop

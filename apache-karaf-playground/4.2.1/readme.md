@@ -4,6 +4,7 @@
 * apache-karaf 4.2.1
 * open JDK 10.0.2.13 (https://hub.docker.com/r/adoptopenjdk/openjdk10)
 * filebeat 6.2.3
+* Use /deploy.gsh to deploy features at the first startup
 
 ## Create Image
 
