@@ -26,7 +26,7 @@ if [ "x$START_REINSTALL" == "x1" ]; then
 fi
 if [ "x$START_FILEBEAT" == "x1" ]; then
   cd /opt/filebeat
-  /opt/filebeat/filebeat -e -c $FILEBEAT_CONFIG run &
+  /opt/filebeat/filebeat -e -c $FILEBEAT_CONFIG &
   sleep 1
 fi
 

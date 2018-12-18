@@ -34,10 +34,30 @@ This filebeat is watching for your local log files
 docker run -d -i --link log-logstash:logstash -v  /var/log:/log --name log-filebeat log-filebeat
 ```
 
-### Access the containers
+### Setup kibana
 
+* Enter kibana page http://localhost:15601 and click 'Discover'
+* The Dialog 'Step 1 of 2: Define index pattern' appears. Insert into the text field 'Index pattern' the name 'testindex'. Click 'Next Step'
+* In 'Step 2 of 2: Configure settings' select '@timestamp' and click 'Create index pattern'
+* Now you can discover and search the index
+
+
+
+
+
+### Access the containers
+```
 docker exec -it --user root test-kibana /bin/bash
 
 docker exec -it --user root test-logstash /bin/bash
 
 docker exec -it --user root test-filebeat /bin/bash
+```
+## Mass Actions
+
+### Remove All
+```
+docker rm log-logstash
+docker rm log-kibana
+docker rm log-elastic
+```

@@ -37,7 +37,7 @@ docker run -it -v /home/user/.m2:/root/.m2 -p 15005:5005 --name playground-karaf
 Use the env START_FILEBEAT=1 to activate filebeat. Start the log environment before (see elasticstack)
 
 ```
-docker run -it --link log-logstash:fb_logstash -e "START_FILEBEAT=1" --name playground-karaf mhus/apache-karaf-playground:4.2.1
+docker run -it --link log-logstash:logstash -e "START_FILEBEAT=1" --name playground-karaf mhus/apache-karaf-playground:4.2.1
 ```
 
 All together
