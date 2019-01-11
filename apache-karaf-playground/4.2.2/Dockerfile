@@ -1,13 +1,14 @@
 FROM adoptopenjdk/openjdk10:jdk-10.0.2.13
 MAINTAINER Mike Hummel <mh@mhus.de>
 
-ARG FILEBEAT_VERSION=6.2.3
+ARG FILEBEAT_VERSION=6.5.4
 ARG KARAF_VERSION=4.2.2
 ENV JAVA_MAX_MEM=2048m
+ENV APP_NAME=karaf_playground
 
 RUN set -x \
     && echo ">>> Install linux tools" \
-    && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano \
+    && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano psmisc \
     && echo ">>> Install fileabeat" \
     && cd /opt \
     && wget --no-check-certificate -O filebeat.tar.gz https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz \

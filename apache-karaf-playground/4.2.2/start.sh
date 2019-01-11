@@ -25,6 +25,9 @@ if [ "x$START_REINSTALL" == "x1" ]; then
   rm installdone.mark
 fi
 if [ "x$START_FILEBEAT" == "x1" ]; then
+    echo "-------------------------------------"
+    echo "Start Filebeat"
+    echo "-------------------------------------"
   cd /opt/filebeat
   /opt/filebeat/filebeat -e -c $FILEBEAT_CONFIG &
   sleep 1
@@ -34,28 +37,18 @@ fi
 cd /opt/karaf
 rm instances/instance.properties 
 
-if [ ! -e installdone.mark -a -e /deploy.gogo ]; then
-    rm -r data/cache/*
-    rm data/log/*
-    echo "Start karaf in background"
-	./bin/start
-	sleep 5
-	while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do
-	  echo "."
-	  sleep 5
-	done
-    cat /deploy.gogo | ./bin/client
-	sleep 2
-	echo "Stop karaf"
-	./bin/stop
-	sleep 5
-	while [ "$(grep -c Stopping\ JMX\ OSGi\ agent data/log/karaf.log)" = "0" ]; do
-	  echo "."
-	  sleep 5
-	done
-	touch installdone.mark
+if [ ! -e installdone.mark ]; then
+    /install.sh
 fi
 
 # Start Karaf
 
+echo "-------------------------------------"
+printenv
+echo "-------------------------------------"
+echo "Start Karaf"
+echo "-------------------------------------"
 ./bin/karaf $@
+echo "-------------------------------------"
+echo "Finish"
+echo "-------------------------------------"

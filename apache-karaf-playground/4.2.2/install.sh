@@ -1,24 +1,64 @@
-cd /opt/karaf \
-&& ./bin/start \
-&& sleep 2 \
-&& (tail -f /opt/karaf/data/log/karaf.log &) \
-&& echo "Wait for startup 1" \
-&& while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do echo "."; sleep 10; done \
-&& sleep 5 \
-&& ./bin/stop \
-&& echo "Wait for shutdown 1" \
-&& sleep 5 \
-&& while [ "$(ps -efa | grep -v grep | grep -c java)" != "0" ]; do echo "."; sleep 5; done \
-&& rm -r /opt/karaf/data/log/* \
-&& ./bin/start \
-&& sleep 2 \
-&& (tail -f /opt/karaf/data/log/karaf.log &) \
-&& echo "Wait for startup 2" \
-&& while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do echo "."; sleep 10; done \
-&& sleep 5 \
-&& ./bin/stop \
-&& echo "Wait for shutdown 2" \
-&& sleep 5 \
-&& while [ "$(ps -efa | grep -v grep | grep -c java)" != "0" ]; do echo "."; sleep 5; done \
-&& rm -r ~/.m2/repository/* \
-&& rm -r /opt/karaf/data/log/* 
+#!/bin/bash
+cd /opt/karaf
+echo "====================================="
+echo "Install Features"
+echo "====================================="
+rm -r data/cache/*
+rm data/log/*
+echo "-------------------------------------"
+echo "Start karaf in background"
+echo "-------------------------------------"
+./bin/start
+sleep 5
+(tail -f data/log/karaf.log) &
+while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do
+  echo "."
+  sleep 5
+done
+
+cnt=1
+
+while [ -e /deploy${cnt}.gogo ]
+do
+    echo "-------------------------------------"
+    echo "Installation of /deploy${cnt}.gogo"
+    echo "-------------------------------------"
+    cat /deploy${cnt}.gogo
+    echo "-------------------------------------"
+    cat /deploy${cnt}.gogo | ./bin/client
+    echo "-------------------------------------"
+    echo "DEPLOY FINISHED"
+    echo "-------------------------------------"
+    
+#    for c in 1 2 3 4 5 6 7 8 9 10
+#    do
+#        echo Round $c
+#        echo "-------------------------------------"
+#        echo list | ./bin/client
+#        echo "-------------------------------------"
+#        sleep 1
+#    done
+    sleep 10
+    
+    echo "-------------------------------------"
+    echo "Actual Features"
+    echo "-------------------------------------"
+    echo list | ./bin/client
+
+    let cnt=${cnt}+1
+done
+
+echo "-------------------------------------"
+echo "Stop karaf"
+echo "-------------------------------------"
+./bin/stop
+sleep 5
+while [ "$(grep -c Stopping\ JMX\ OSGi\ agent data/log/karaf.log)" = "0" ]; do
+  echo "."
+  sleep 5
+done
+touch installdone.mark
+killall tail
+echo "====================================="
+echo "Finish"
+echo "====================================="

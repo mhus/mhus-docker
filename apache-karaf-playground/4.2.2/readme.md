@@ -3,8 +3,8 @@
 * ubuntu:16.04
 * apache-karaf 4.2.2
 * open JDK 10.0.2.13 (https://hub.docker.com/r/adoptopenjdk/openjdk10)
-* filebeat 6.2.3
-* Use /deploy.gsh to deploy features at the first startup
+* filebeat 6.5.4
+* Use /deploy[1..n].gogo to deploy features at the first startup or at install time
 
 ## Create Image
 
