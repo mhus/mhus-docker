@@ -1,0 +1,21 @@
+FROM adoptopenjdk/openjdk10:jdk-10.0.2.13
+MAINTAINER Mike Hummel
+
+ARG APP_UID=501
+
+RUN set -x \
+  && apt-get update && apt-get install -y --no-install-recommends jq wget curl nano psmisc git maven vim less && rm -rf /var/lib/apt/lists/* \
+  && useradd -u $APP_UID -ms /start.sh user \
+  && mkdir /home/user/deploy \
+  && mkdir /home/user/retry \
+  && mkdir /home/user/build
+  
+COPY build /home/user/build/
+COPY start.sh /start.sh
+
+RUN set -x \
+  && chown -R $APP_UID /home/user \
+  && chmod +x /start.sh
+
+USER $APP_UID
+ENTRYPOINT ["/start.sh"]
