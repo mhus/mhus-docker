@@ -40,7 +40,7 @@ else
     touch /home/user/retry/$name
     git pull
     if [ "x$CLEAN" = "x1" ]; then
-      mvn clean $@ || exit 1
+      mvn clean $@
     else
       mvn install $@ || exit 1
     fi
