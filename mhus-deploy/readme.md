@@ -38,7 +38,12 @@ To add more deploy scripts you need to create your own Dockerfile and inherit th
 
 ```
 FROM mhus/mhus-deploy
+ARG APP_UID=501
 COPY build /home/user/build/
+USER 0
+RUN set -x \
+  && chown -R $APP_UID /home/user
+USER $APP_UID
 ```
 
 ## Push

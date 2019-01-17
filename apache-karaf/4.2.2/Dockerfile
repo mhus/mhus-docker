@@ -1,16 +1,16 @@
 FROM mhus/apache-karaf-playground:4.2.2
 MAINTAINER Mike Hummel <mh@mhus.de>
 
-ARG APP_UID=501
+ENV APP_UID=501
+
+COPY start2.sh /
 
 RUN set -x \
  && echo ">>> Install" \
  && useradd -u $APP_UID -ms /start.sh user \
- && chown -R $APP_UID /opt/karaf \
+ && chmod ugo+x /start2.sh \
+ && chown -R user:user /opt/karaf \
  && mkdir -p /home/user/.m2/repository \
- && chown -R user /home/user/.m2/repository \
- && chmod ugo+x /install.sh \
- && chmod ugo+x /start.sh
- 
-USER $KARAF_UID
+ && chown -R user:user /home/user/.m2
 
+ENTRYPOINT ["/start2.sh"]

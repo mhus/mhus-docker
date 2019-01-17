@@ -8,7 +8,7 @@ ENV APP_NAME=karaf_playground
 
 RUN set -x \
     && echo ">>> Install linux tools" \
-    && apt-get update && apt-get install -y --no-install-recommends jq wget curl less nano psmisc \
+    && apt-get update && apt-get install -y --no-install-recommends sudo jq wget curl less nano psmisc \
     && echo ">>> Install fileabeat" \
     && cd /opt \
     && wget --no-check-certificate -O filebeat.tar.gz https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz \
@@ -38,8 +38,8 @@ COPY install.sh /
 
 RUN set -x \
     && echo ">>> Prepare start" \
-    && chmod u+x /start.sh \
-    && chmod u+x /install.sh
+    && chmod ugo+x /start.sh \
+    && chmod ugo+x /install.sh
 
 EXPOSE 8181
 
