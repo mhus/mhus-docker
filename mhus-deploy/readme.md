@@ -31,3 +31,21 @@ docker stop mhus-deploy
 docker rm mhus-deploy
 docker rmi mhus-deploy
 ```
+
+## Enhance
+
+To add more deploy scripts you need to create your own Dockerfile and inherit this container image. Copy the additional build scripts in the build folder
+
+```
+FROM mhus/mhus-deploy
+COPY build /home/user/build/
+```
+
+## Push
+```
+docker tag mhus-deploy "mhus/mhus-deploy:1.0.0"
+docker tag mhus-deploy "mhus/mhus-deploy:latest"
+
+docker push "mhus/mhus-deploy:1.0.0"
+docker push "mhus/mhus-deploy:latest"
+```
