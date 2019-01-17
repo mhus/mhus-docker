@@ -1,5 +1,4 @@
 #!/bin/bash
-init.sh
 
 mhus-transform.sh $@ || exit 1
 

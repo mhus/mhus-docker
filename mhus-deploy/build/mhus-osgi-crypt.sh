@@ -1,5 +1,4 @@
 #!/bin/bash
-init.sh
 
 mhus-osgi-tools.sh $@ || exit 1
 

@@ -1,5 +1,4 @@
 #!/bin/bash
-init.sh
 
 mhus-lib.sh $@ || exit 1
 
