@@ -3,10 +3,12 @@
 
 ## deploy first time
 ```
+DATA=/mnt/storage/mhus
+
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
- -v /mnt/storage/mhus/m2:/root/.m2 \
- -v /mnt/storage/mhus/deploy:/deploy \
+ -v $DATA/m2:/home/user/.m2 \
+ -v $DATA/deploy:/home/user/deploy \
  mhus-deploy
 ```
 

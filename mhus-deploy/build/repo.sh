@@ -1,7 +1,10 @@
 #!/bin/bash
 
 name=$1
-url=$2
+shift
+
+url=$1
+shift
 
 cd /home/user/deploy
 
@@ -17,7 +20,7 @@ echo " Clone"
 echo "----------------------------------"
   git clone $url $name
   cd $name
-  mvn install || exit 1
+  mvn install $@ || exit 1
 else
   cd $name
   git remote update
@@ -33,7 +36,7 @@ else
     if [ "x$CLEAN" = "x1" ]; then
       mvn clean
     fi
-    mvn install || exit 1
+    mvn install $@ || exit 1
     rm /home/user/retry/$name
   fi
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH = /home/user/build:$PATH
+export PATH=/home/user/build:$PATH
 
 git config --global credential.helper store
 
