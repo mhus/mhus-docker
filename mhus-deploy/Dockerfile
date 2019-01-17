@@ -9,6 +9,7 @@ RUN set -x \
   && useradd -u $APP_UID -ms /start.sh user \
   && mkdir /home/user/deploy \
   && mkdir /home/user/retry \
+  && mkdir /home/user/done \
   && mkdir /home/user/build
   
 COPY build /home/user/build/

@@ -6,6 +6,12 @@ shift
 url=$1
 shift
 
+if [  -e "/home/user/done/${name}" ]
+then
+    echo "--- Skip ${name} - already none"
+    exit 0
+fi
+
 cd /home/user/deploy
 
 echo "==============================="
@@ -34,10 +40,12 @@ else
     touch /home/user/retry/$name
     git pull
     if [ "x$CLEAN" = "x1" ]; then
-      mvn clean
+      mvn clean $@ || exit 1
+    else
+      mvn install $@ || exit 1
     fi
-    mvn install $@ || exit 1
     rm /home/user/retry/$name
+    touch /home/user/done/$name
   fi
 fi
 
