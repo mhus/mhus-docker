@@ -35,13 +35,16 @@ COPY karaf /opt/karaf/
 COPY filebeat /
 COPY start.sh /
 COPY install.sh /
+COPY environment.sh /
+COPY environment_folders.txt /
 
 RUN set -x \
     && echo ">>> Prepare start" \
     && chmod ugo+x /start.sh \
-    && chmod ugo+x /install.sh
+    && chmod ugo+x /install.sh \
+    && chmod ugo+x /environment.sh
 
 EXPOSE 8181
 
 ENTRYPOINT ["/start.sh"]
-
+CMD []

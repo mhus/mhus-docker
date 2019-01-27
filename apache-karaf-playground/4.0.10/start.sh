@@ -35,11 +35,12 @@ cd /opt/karaf
 rm instances/instance.properties 
 
 if [ ! -e installdone.mark -a -e /deploy.go ]; then
+    /environment.sh
     rm -r data/cache/*
     rm data/log/*
     echo "Start karaf in background"
 	./bin/start
-	sleep 5
+	sleep 10
 	while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do
 	  echo "."
 	  sleep 5

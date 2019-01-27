@@ -38,7 +38,11 @@ cd /opt/karaf
 rm instances/instance.properties 
 
 if [ ! -e installdone.mark ]; then
+    /environment.sh
     /install.sh
+    if [  -e /custom.sh ]; then
+      /custom.sh
+    fi
 fi
 
 # Start Karaf
