@@ -5,6 +5,7 @@ ARG FILEBEAT_VERSION=6.5.4
 ARG KARAF_VERSION=4.2.2
 ENV JAVA_MAX_MEM=2048m
 ENV APP_NAME=karaf_playground
+ENV JAVA_DEBUG_PORT=*:5005
 
 RUN set -x \
     && echo ">>> Install linux tools" \
