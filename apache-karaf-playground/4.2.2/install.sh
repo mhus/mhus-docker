@@ -18,14 +18,14 @@ done
 
 cnt=1
 
-while [ -e /deploy${cnt}.gogo ]
+while [ -e /docker/deploy/deploy${cnt}.gogo ]
 do
     echo "-------------------------------------"
-    echo "Installation of /deploy${cnt}.gogo"
+    echo "Installation of deploy${cnt}.gogo"
     echo "-------------------------------------"
-    cat /deploy${cnt}.gogo
+    cat /docker/deploy/deploy${cnt}.gogo
     echo "-------------------------------------"
-    cat /deploy${cnt}.gogo | ./bin/client
+    cat /docker/deploy/deploy${cnt}.gogo | ./bin/client
     echo "-------------------------------------"
     echo "DEPLOY FINISHED"
     echo "-------------------------------------"

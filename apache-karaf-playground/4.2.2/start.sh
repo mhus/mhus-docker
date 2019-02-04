@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "x$RUNTIME_ENV" == "x" ]; then
-  RUNTIME_ENV=/root/.m2/${APP_NAME}_env.sh
+  RUNTIME_ENV=~/.m2/${APP_NAME}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
   FILEBEAT_CONFIG=/filebeat/logstash.yml
@@ -23,6 +23,7 @@ if [ -e $RUNTIME_ENV ]; then
 fi
 if [ "x$START_REINSTALL" == "x1" ]; then
   rm installdone.mark
+  rm environmentdone.mark
 fi
 if [ "x$START_FILEBEAT" == "x1" ]; then
     echo "-------------------------------------"
@@ -33,15 +34,22 @@ if [ "x$START_FILEBEAT" == "x1" ]; then
   sleep 1
 fi
 
-# install 
+# prepare
 cd /opt/karaf
 rm instances/instance.properties 
 
-if [ ! -e installdone.mark ]; then
-    /environment.sh
-    /install.sh
-    if [  -e /custom.sh ]; then
-      /custom.sh
+# environment
+if [ ! "x$PREVENT_ENVIRONMENT" == "x1" -a ! -e environmentdone.mark ]; then
+    /docker/environment.sh
+    if [  -e /docker/environment_custom.sh ]; then
+      /docker/environment_custom.sh
+    fi
+fi
+# install
+if [ ! "x$PREVENT_INSTALL" == "x1" -a ! -e installdone.mark ]; then
+    /docker/install.sh
+    if [  -e /docker/install_custom.sh ]; then
+      /docker/install_custom.sh
     fi
 fi
 
@@ -50,9 +58,9 @@ fi
 echo "-------------------------------------"
 printenv
 echo "-------------------------------------"
-echo "Start Karaf"
+echo "Start Karaf $$"
 echo "-------------------------------------"
-./bin/karaf $@
+exec ./bin/karaf $@
 echo "-------------------------------------"
 echo "Finish"
 echo "-------------------------------------"

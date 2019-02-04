@@ -5,7 +5,10 @@ ARG FILEBEAT_VERSION=6.5.4
 ARG KARAF_VERSION=4.2.2
 ENV JAVA_MAX_MEM=2048m
 ENV APP_NAME=karaf_playground
+# for jdk9 and above, debug also from other then localhost
 ENV JAVA_DEBUG_PORT=*:5005
+# to shutdown graceful use exec in start script
+ENV KARAF_EXEC="exec"
 
 RUN set -x \
     && echo ">>> Install linux tools" \
@@ -27,25 +30,27 @@ RUN set -x \
     && rm /tmp/apache-karaf.tar.gz \
     && mkdir -p /opt/karaf/data /opt/karaf/data/log \
     && mkdir -p /root/.m2/repository \
-	&& echo ">>> Cleanup" \
-	&& rm -r /root/.m2/* \
+    && echo ">>> Cleanup" \
+    && rm -r /root/.m2/* \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && echo ">>> Setup" \
+    && mkdir -p /docker/deploy
 
 COPY karaf /opt/karaf/
-COPY filebeat /
-COPY start.sh /
-COPY install.sh /
-COPY environment.sh /
-COPY environment_folders.txt /
+COPY filebeat /docker
+COPY start.sh /docker
+COPY install.sh /docker
+COPY environment.sh /docker
+COPY environment_folders.txt /docker
 
 RUN set -x \
     && echo ">>> Prepare start" \
-    && chmod ugo+x /start.sh \
-    && chmod ugo+x /install.sh \
-    && chmod ugo+x /environment.sh
+    && chmod ugo+x /docker/start.sh \
+    && chmod ugo+x /docker/install.sh \
+    && chmod ugo+x /docker/environment.sh
 
 EXPOSE 8181
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/docker/start.sh"]
 CMD []
