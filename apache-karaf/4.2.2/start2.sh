@@ -14,4 +14,4 @@ fi
 
 chown -R user:user /opt/karaf
 
-exec runuser user /docker/start.sh $@
+exec runuser user $@
