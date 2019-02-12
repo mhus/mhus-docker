@@ -22,8 +22,7 @@ RUN set -x \
     && touch filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.version \
     && cd / \
     && echo ">>> Download and install karaf" \
-    && mirror=$(curl --stderr /dev/null https://www.apache.org/dyn/closer.cgi\?as_json\=1 | jq -r '.preferred') \
-    && url="${mirror}karaf/${KARAF_VERSION}/apache-karaf-${KARAF_VERSION}.tar.gz" \
+    && url="http://archive.apache.org/dist/karaf/4.2.2/apache-karaf-4.2.2.tar.gz" \
     && curl -s -o "/tmp/apache-karaf.tar.gz" "${url}" \
     && mkdir -p /opt/karaf \
     && tar --strip-components=1 -C /opt/karaf -xzf /tmp/apache-karaf.tar.gz \
