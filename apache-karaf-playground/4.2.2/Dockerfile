@@ -1,4 +1,5 @@
-FROM adoptopenjdk/openjdk10:jdk-10.0.2.13
+#FROM adoptopenjdk/openjdk10:jdk-10.0.2.13
+FROM openjdk:11.0.2-jdk
 MAINTAINER Mike Hummel <mh@mhus.de>
 
 ARG FILEBEAT_VERSION=6.5.4
