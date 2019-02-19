@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk10:jdk-10.0.2.13
+FROM openjdk:11.0.2-jdk
 MAINTAINER Mike Hummel
 
 ARG APP_UID=501

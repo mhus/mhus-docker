@@ -48,9 +48,9 @@ USER $APP_UID
 
 ## Push
 ```
-docker tag mhus-deploy "mhus/mhus-deploy:1.0.0"
+docker tag mhus-deploy "mhus/mhus-deploy:1.0.1"
 docker tag mhus-deploy "mhus/mhus-deploy:latest"
 
-docker push "mhus/mhus-deploy:1.0.0"
+docker push "mhus/mhus-deploy:1.0.1"
 docker push "mhus/mhus-deploy:latest"
 ```
