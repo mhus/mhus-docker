@@ -7,8 +7,8 @@
 ```
 ./create.sh
 
-docker tag apache-karaf "mhus/apache-karaf:4.2.3"
-docker tag apache-karaf "mhus/apache-karaf:latest"
+docker tag apache-karaf:4.2.3 "mhus/apache-karaf:4.2.3"
+docker tag apache-karaf:4.2.3 "mhus/apache-karaf:latest"
 
 docker push "mhus/apache-karaf:4.2.3"
 docker push "mhus/apache-karaf:latest"

@@ -10,8 +10,8 @@
 ```
 ./create.sh
 
-docker tag apache-karaf-playground "mhus/apache-karaf-playground:4.2.3"
-docker tag apache-karaf-playground "mhus/apache-karaf-playground:latest"
+docker tag apache-karaf-playground:4.2.3 "mhus/apache-karaf-playground:4.2.3"
+docker tag apache-karaf-playground:4.2.3 "mhus/apache-karaf-playground:latest"
 
 docker push "mhus/apache-karaf-playground:4.2.3"
 docker push "mhus/apache-karaf-playground:latest"
