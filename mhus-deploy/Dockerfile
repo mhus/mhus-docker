@@ -1,7 +1,7 @@
 FROM openjdk:11.0.2-jdk
 MAINTAINER Mike Hummel
 
-ARG APP_UID=501
+ENV APP_UID=501
 
 RUN set -x \
   && apt-get update && apt-get install -y --no-install-recommends jq wget curl nano psmisc git maven vim less \
@@ -19,5 +19,5 @@ RUN set -x \
   && chown -R $APP_UID /home/user \
   && chmod +x /start.sh
 
-USER $APP_UID
+#USER $APP_UID
 ENTRYPOINT ["/start.sh"]
