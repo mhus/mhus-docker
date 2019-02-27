@@ -40,7 +40,7 @@ else
     touch /home/user/retry/$name
     echo " Compile"
     echo "----------------------------------"
-    git pull
+    git pull || exit 1
     mvn $@ || exit 1
   fi
 fi
