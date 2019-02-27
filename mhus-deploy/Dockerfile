@@ -6,7 +6,7 @@ ENV APP_UID=501
 RUN set -x \
   && apt-get update && apt-get install -y --no-install-recommends jq wget curl nano psmisc git maven vim less \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-  && useradd -u $APP_UID -ms /start.sh user \
+  && useradd -u $APP_UID -ms /bin/bash user \
   && mkdir /home/user/deploy \
   && mkdir /home/user/retry \
   && mkdir /home/user/done \
@@ -19,5 +19,6 @@ RUN set -x \
   && chown -R $APP_UID /home/user \
   && chmod +x /start.sh
 
-#USER $APP_UID
+USER 0
 ENTRYPOINT ["/start.sh"]
+CMD []

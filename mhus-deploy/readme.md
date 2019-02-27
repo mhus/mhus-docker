@@ -9,7 +9,18 @@ docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -v $DATA/m2:/home/user/.m2 \
  -v $DATA/deploy:/home/user/deploy \
- mhus-deploy
+ mhus/mhus-deploy:1.0.2
+
+
+DATA=~/tmp/mhus
+mkdir -p $DATA
+
+docker run -it --name mhus-deploy \
+ -h deploy-mhus \
+ -v ~/.m2:/home/user/.m2 \
+ -v $DATA/deploy:/home/user/deploy \
+ mhus/mhus-deploy:1.0.2
+ 
 ```
 
 ## start again
@@ -48,9 +59,7 @@ USER $APP_UID
 
 ## Push
 ```
-docker tag mhus-deploy "mhus/mhus-deploy:1.0.1"
-docker tag mhus-deploy "mhus/mhus-deploy:latest"
-
-docker push "mhus/mhus-deploy:1.0.1"
+docker push "mhus/mhus-deploy:1.0.2"
+docker tag mhus/mhus-deploy:1.0.2 "mhus/mhus-deploy:latest"
 docker push "mhus/mhus-deploy:latest"
 ```

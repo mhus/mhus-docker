@@ -19,28 +19,33 @@ echo " ${name}"
 echo " ${url}"
 echo "==============================="
 
+
 if [ ! -d $name ]; then
-echo " Clone"
-echo "----------------------------------"
+  touch /home/user/retry/$name
+  echo " Clone"
+  echo "----------------------------------"
   git clone $url $name
   cd $name
-  mvn install $@ || exit 1
+  mvn $@ || exit 1
 else
   cd $name
   git remote update
-  uptodate=$(git status |grep -c "Your branch is up to date")
+  status=$(git status)
+  uptodate=$(git status |grep -c "up-to-date")
+  echo GIT Status: $uptodate - $status
   if [ "x$uptodate" = "x1" -a ! -e "/home/user/retry/$name" ]; then
     echo "Up-to-date"
     echo "----------------------------------"
   else
+    touch /home/user/retry/$name
     echo " Compile"
     echo "----------------------------------"
-    touch /home/user/retry/$name
     git pull
     mvn $@ || exit 1
-    rm /home/user/retry/$name
-    touch /home/user/done/$name
   fi
 fi
+
+rm /home/user/retry/$name
+touch /home/user/done/$name
 
 cd ..
