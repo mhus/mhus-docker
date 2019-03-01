@@ -1,4 +1,4 @@
 #!/bin/bash
 . _init.sh
-_repo.sh mhus-lib https://github.com/mhus/mhus-parent.git $@ || exit 1
+_repo.sh mhus-parent https://github.com/mhus/mhus-parent.git $@ || exit 1
 . _done.sh
