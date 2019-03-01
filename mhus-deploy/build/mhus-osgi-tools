@@ -1,6 +1,6 @@
 #!/bin/bash
 . _init.sh
-mhus-lib.sh $@ || exit 1
+mhus-lib $@ || exit 1
 
 _repo.sh mhus-osgi-tools https://github.com/mhus/mhus-osgi-tools.git $@ || exit 1
 . _done.sh

@@ -2,7 +2,7 @@
 
 cd /home/user
 
-reset.sh
+_reset.sh
 
 if [  -z $1 ]; then
   for i in $(ls deploy/); do echo $i; touch retry/$i; done

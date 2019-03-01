@@ -1,6 +1,8 @@
 
 # Deploy
 
+11.x - jdk 11 
+
 ## deploy first time
 ```
 DATA=/mnt/storage/mhus
@@ -9,7 +11,7 @@ docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -v $DATA/m2:/home/user/.m2 \
  -v $DATA/deploy:/home/user/deploy \
- mhus/mhus-deploy:1.0.2
+ mhus/mhus-deploy:11.0
 
 
 DATA=~/tmp/mhus
@@ -19,7 +21,7 @@ docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -v ~/.m2:/home/user/.m2 \
  -v $DATA/deploy:/home/user/deploy \
- mhus/mhus-deploy:1.0.2
+ mhus/mhus-deploy:11.0
  
 ```
 
@@ -59,7 +61,7 @@ USER $APP_UID
 
 ## Push
 ```
-docker push "mhus/mhus-deploy:1.0.2"
-docker tag mhus/mhus-deploy:1.0.2 "mhus/mhus-deploy:latest"
+docker push "mhus/mhus-deploy:11.0"
+docker tag mhus/mhus-deploy:11.0 "mhus/mhus-deploy:latest"
 docker push "mhus/mhus-deploy:latest"
 ```
