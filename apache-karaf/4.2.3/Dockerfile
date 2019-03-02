@@ -11,6 +11,8 @@ RUN set -x \
  && chmod ugo+x /docker/start2.sh \
  && chown -R user:user /opt/karaf \
  && mkdir -p /home/user/.m2/repository \
- && chown -R user:user /home/user/.m2
+ && chown -R user:user /home/user/.m2 \
+ && mkdir /opt/filebeat/data \
+ && chown -R user:user /opt/filebeat/data
 
 ENTRYPOINT ["/docker/start2.sh"]

@@ -13,5 +13,6 @@ else
 fi
 
 chown -R user:user /opt/karaf
+chown -R user:user /opt/filebeat/data
 
 exec runuser user $@
