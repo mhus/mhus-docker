@@ -8,7 +8,7 @@ if [  ! -f Dockerfile ]; then
 fi
 
 if [ "$1" = "clean" ]; then
-	docker build --no-cache -t apache-karaf-playground:$VERSION .
+	docker build --no-cache -t mhus/apache-karaf-playground:$VERSION .
 else
-	docker build -t apache-karaf-playground:$VERSION .
+	docker build -t mhus/apache-karaf-playground:$VERSION .
 fi

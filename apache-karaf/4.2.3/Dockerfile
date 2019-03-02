@@ -1,4 +1,4 @@
-FROM apache-karaf-playground:4.2.3
+FROM mhus/apache-karaf-playground:4.2.3
 MAINTAINER Mike Hummel <mh@mhus.de>
 
 ENV APP_UID=501
