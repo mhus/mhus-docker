@@ -2,6 +2,7 @@
 . _init.sh
 
 mhus-transform $@ || exit 1
+mhus-constgenerator $@ || exit 1
 
 _repo.sh mhus-sop https://github.com/mhus/mhus-sop.git $@ || exit 1
 . _done.sh

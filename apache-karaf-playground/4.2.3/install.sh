@@ -53,9 +53,16 @@ echo "Stop karaf"
 echo "-------------------------------------"
 ./bin/stop
 sleep 5
+cnt=0
 while [ "$(grep -c Stopping\ JMX\ OSGi\ agent data/log/karaf.log)" = "0" ]; do
   echo "."
   sleep 5
+  let cnt=$cnt+1
+  if [ $cnt -gt 30 ]; then
+      killall -9 java
+      sleep 2
+      break
+  fi
 done
 touch installdone.mark
 killall tail
