@@ -1,0 +1,39 @@
+
+tags: ["audit","system"]
+
+auditbeat.modules:
+
+- module: auditd
+  audit_rules: |
+    -w /etc/passwd -p wa -k identity
+    -a always,exit -F arch=b32 -S open,creat,truncate,ftruncate,openat,open_by_handle_at -F exit=-EPERM -k access
+
+- module: file_integrity
+  paths:
+  - /host/bin
+  - /host/usr/bin
+  - /host/sbin
+  - /host/usr/sbin
+  - /host/etc
+  - /host/lib
+  - /host/user/lib
+  scan_at_start: true
+  scan_rate_per_sec: 50 MiB
+  max_file_size: 100 MiB
+  hash_types: [sha1]
+  recursive: true
+  
+- module: system
+  datasets:
+    - host
+    - process
+    - socket
+    - user
+  period: 10m
+  state.period: 12h
+  user.detect_password_changes: true
+  
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+  hosts: ["logstash:5000"]

@@ -8,30 +8,53 @@ docker build --build-arg UID=501 -t log-filebeat filebeat
 
 ### Start elastic search
 ```
-docker run -d -i -e "discovery.type=single-node" --name log-elastic docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+docker run -d -i \
+ -e "discovery.type=single-node" \
+ --name log-elastic \
+ docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 
-docker run -d -i -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" --name log-elastic docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+docker run -d -i \
+ -p 9200:9200 \
+ -p 9300:9300 \
+ -e "discovery.type=single-node" \
+ --name log-elastic \
+ docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 
 ```
 ### Start kibana
 ```
-docker run -d -i -e "ELASTICSEARCH_URL=http://elasticsearch:9200" -p 15601:5601 --link log-elastic:elasticsearch --name log-kibana docker.elastic.co/kibana/kibana:6.4.2
+docker run -d -i \
+ -e "ELASTICSEARCH_URL=http://elasticsearch:9200" \
+ -p 15601:5601 \
+ --link log-elastic:elasticsearch \
+ --name log-kibana \
+ docker.elastic.co/kibana/kibana:6.4.2
 ```
 You can access the UI in the browser with http://localhost:15601
 
 ### Start logstash
 ```
-docker run -d -i --link log-elastic:elasticsearch --name log-logstash log-logstash
+docker run -d -i \
+ --link log-elastic:elasticsearch \
+ --name log-logstash \
+ log-logstash
 
-docker run -d -i -p 5000:5000 --link log-elastic:elasticsearch --name log-logstash log-logstash
-
+docker run -d -i \
+ -p 5000:5000 \
+ --link log-elastic:elasticsearch \
+ --name log-logstash \
+ log-logstash
 ```
 ### Start a filebeat
 
 This filebeat is watching for your local log files
 
 ```
-docker run -d -i --link log-logstash:logstash -v  /var/log:/log --name log-filebeat log-filebeat
+docker run -d -i \
+ --link log-logstash:logstash \
+ -v /var/log:/log \
+ --name log-filebeat \
+ log-filebeat
 ```
 
 ### Setup kibana
@@ -41,7 +64,17 @@ docker run -d -i --link log-logstash:logstash -v  /var/log:/log --name log-fileb
 * In 'Step 2 of 2: Configure settings' select '@timestamp' and click 'Create index pattern'
 * Now you can discover and search the index
 
+### Start auditbeat
 
+See https://www.elastic.co/guide/en/beats/auditbeat/current/auditbeat-module-auditd.html
+
+docker run -d -i \
+ --cap-add="AUDIT_CONTROL" \
+ --cap-add="AUDIT_READ" \
+ --link log-logstash:logstash \
+ -v /:/host
+ --name log-auditbeat
+ log-auditbeat
 
 
 
