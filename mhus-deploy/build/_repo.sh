@@ -81,7 +81,7 @@ else
     echo " maven $@"
     echo "----------------------------------"
     if [ "x$DEPLOY_GIT_DISABLED" != "x1" ]; then
-      git pull || quitGit pull
+      git pull || gitQuit pull
     fi
     if [ "x$DEPLOY_MAVEN_DISABLED" != "x1" ]; then
         mvn $@ || mavenQuit
