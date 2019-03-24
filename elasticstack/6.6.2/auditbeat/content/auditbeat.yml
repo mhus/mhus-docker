@@ -23,6 +23,16 @@ auditbeat.modules:
   hash_types: [sha1]
   recursive: true
   
+- module: system
+  datasets:
+    - host
+    - process
+    - socket
+    - user
+  period: 10m
+  state.period: 12h
+  user.detect_password_changes: true
+  
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts

@@ -1,3 +1,4 @@
+
 ## Create the images
 ```
 docker build -t log-logstash logstash 
@@ -11,14 +12,14 @@ docker build --build-arg UID=501 -t log-filebeat filebeat
 docker run -d -i \
  -e "discovery.type=single-node" \
  --name log-elastic \
- docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+ docker.elastic.co/elasticsearch/elasticsearch:6.6.2
 
 docker run -d -i \
  -p 9200:9200 \
  -p 9300:9300 \
  -e "discovery.type=single-node" \
  --name log-elastic \
- docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+ docker.elastic.co/elasticsearch/elasticsearch:6.6.2
 
 ```
 ### Start kibana
@@ -28,7 +29,7 @@ docker run -d -i \
  -p 15601:5601 \
  --link log-elastic:elasticsearch \
  --name log-kibana \
- docker.elastic.co/kibana/kibana:6.4.2
+ docker.elastic.co/kibana/kibana:6.6.2
 ```
 You can access the UI in the browser with http://localhost:15601
 
