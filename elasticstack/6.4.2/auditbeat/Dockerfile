@@ -15,8 +15,8 @@ RUN set -x \
     && wget --no-check-certificate -O auditbeat.tar.gz https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${AUDITBEAT_VERSION}-linux-x86_64.tar.gz \
     && tar -xzvf auditbeat.tar.gz \
     && rm auditbeat.tar.gz \
-    && mv auditbeat-${FILEBEAT_VERSION}-linux-x86_64 auditbeat \
-    && touch auditbeat/auditbeat-${FILEBEAT_VERSION}-linux-x86_64.version \
+    && mv auditbeat-${AUDITBEAT_VERSION}-linux-x86_64 auditbeat \
+    && touch auditbeat/auditbeat-${AUDITBEAT_VERSION}-linux-x86_64.version \
     && chown -R $UID auditbeat \
 	&& echo ">>> Prepare start" \
 	&& chmod +x /start.sh \
