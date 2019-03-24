@@ -2,7 +2,8 @@ FROM debian:jessie
 MAINTAINER Mike Hummel <mh@mhus.de>
 
 ARG AUDITBEAT_VERSION=6.4.2
-ARG	UID=1000
+# Have to run as root
+ARG	UID=0
 
 COPY content/auditbeat.yml /auditbeat.yml
 COPY start.sh /
