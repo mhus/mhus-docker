@@ -118,7 +118,7 @@ docker run -it --name mhus-deploy \
  mhus/mhus-deploy:11.0
 ```
 
-Now you can start ending your files to the server using maven, e.g. for mhus-sop:
+Now you can start sending your files to the server using maven, e.g. for mhus-sop:
 
 ```
 mhus-sop sonar:sonar -Dsonar.host.url=http://sonarserver:9000
