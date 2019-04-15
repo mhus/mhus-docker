@@ -66,6 +66,7 @@ while [ "$(grep -c Stopping\ JMX\ OSGi\ agent data/log/karaf.log)" = "0" ]; do
 done
 touch installdone.mark
 killall tail
+rm instances/instance.properties 
 echo "====================================="
 echo "Finish"
 echo "====================================="
