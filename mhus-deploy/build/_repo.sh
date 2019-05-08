@@ -32,7 +32,7 @@ function gitQuit {
 
 if [  -e "/home/user/done/${name}" ]
 then
-    echo "--- Skip ${name} - already none"
+    echo "--- Skip ${name} - already done"
     exit 0
 fi
 

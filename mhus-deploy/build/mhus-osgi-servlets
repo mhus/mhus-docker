@@ -1,0 +1,6 @@
+#!/bin/bash
+. _init.sh
+mhus-lib $@ || exit 1
+
+_repo.sh mhus-osgi-servlets https://github.com/mhus/mhus-osgi-servlets.git $@ || exit 1
+. _done.sh
