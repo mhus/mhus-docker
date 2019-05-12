@@ -1,0 +1,5 @@
+#!/bin/bash
+. _init.sh
+mhus-parent  $@ || exit 1
+_repo.sh faqgenerator-maven-plugin https://github.com/mhus/faqgenerator-maven-plugin.git $@ || exit 1
+. _done.sh
