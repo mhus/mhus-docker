@@ -59,6 +59,9 @@ if [ ! -d $name ]; then
   echo " maven $@"
   echo "----------------------------------"
   if [ "x$DEPLOY_MAVEN_DISABLED" != "x1" ]; then
+    if [ "x$DEPLOY_MAVEN_RESET" = "x1" ]; then
+      mvn reset --hard HEAD
+    fi
     mvn $@ || mavenQuit
   fi
 else
