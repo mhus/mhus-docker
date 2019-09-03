@@ -3,6 +3,7 @@
 mhus-sop $@ || exit 1
 mhus-transform $@ || exit 1
 mhus-ports $@ || exit 1
+mhus-vaadin $@ || exit 1
 
 _repo.sh cherry-reactive https://github.com/mhus/cherry-reactive.git $@ || exit 1
 . _done.sh
