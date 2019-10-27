@@ -1,8 +1,8 @@
 ## Features
 
 * apache-karaf 4.2.3
-* open JDK 11.0.3 (https://hub.docker.com/_/openjdk)
-* filebeat 6.5.4
+* open JDK 11.0.5 (https://hub.docker.com/_/openjdk)
+* filebeat 7.4.0
 * Use /deploy[1..n].gogo to deploy features at the first startup or at install time
 
 ## Create Image
