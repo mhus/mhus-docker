@@ -10,15 +10,15 @@
 ```
 ./create.sh
 
-docker tag mhus/apache-karaf:4.2.3_01 "mhus/apache-karaf-playground:latest"
+docker tag mhus/apache-karaf:4.2.6_02 "mhus/apache-karaf:latest"
 
-docker push "mhus/apache-karaf-playground:4.2.3_01"
-docker push "mhus/apache-karaf-playground:latest"
+docker push "mhus/apache-karaf:4.2.6_02"
+docker push "mhus/apache-karaf:latest"
 ```
 
-## Start playground
+## Start karaf
 ```
-docker run -it --name playground-karaf mhus/apache-karaf-playground:4.2.3_01
+docker run -it --name karaf mhus/apache-karaf:4.2.6_02
 ```
 ### Options
 
@@ -29,19 +29,19 @@ docker run -it --name playground-karaf mhus/apache-karaf-playground:4.2.3_01
 Examples:
 
 ```
-docker run -it -v /home/user/.m2:/root/.m2 -p 15005:5005 --name playground-karaf apache-karaf-playground debug
+docker run -it -v /home/user/.m2:/root/.m2 -p 15005:5005 --name karaf apache-karaf debug
 ```
 
 Use the env START_FILEBEAT=1 to activate filebeat. Start the log environment before (see elasticstack)
 
 ```
-docker run -it --link log-logstash:logstash -e "START_FILEBEAT=1" --name playground-karaf mhus/apache-karaf-playground:4.2.3_01
+docker run -it --link log-logstash:logstash -e "START_FILEBEAT=1" --name karaf mhus/apache-karaf:4.2.6_02
 ```
 
 All together
 
 ```
-docker run -it -v /home/user/.m2:/root/.m2 --link log-logstash:fb_logstash -e "START_FILEBEAT=1" -p 15005:5005 --name playground-karaf mhus/apache-karaf-playground:4.2.3_01 debug
+docker run -it -v /home/user/.m2:/root/.m2 --link log-logstash:fb_logstash -e "START_FILEBEAT=1" -p 15005:5005 --name karaf mhus/apache-karaf:4.2.6_02 debug
 ```
 
 ## Start mhus
