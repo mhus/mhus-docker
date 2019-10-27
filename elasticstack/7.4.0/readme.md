@@ -26,12 +26,12 @@ docker run -d -i \
 ```
 docker run -d -i \
  -e "ELASTICSEARCH_URL=http://elasticsearch:9200" \
- -p 15601:5601 \
+ -p 35601:5601 \
  --link log-elastic:elasticsearch \
  --name log-kibana \
  docker.elastic.co/kibana/kibana:7.4.0
 ```
-You can access the UI in the browser with http://localhost:15601
+You can access the UI in the browser with http://localhost:35601
 
 ### Start logstash
 ```

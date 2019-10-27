@@ -4,7 +4,7 @@ if [ "x$RUNTIME_ENV" == "x" ]; then
   RUNTIME_ENV=~/.m2/${APP_NAME}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
-  FILEBEAT_CONFIG=/filebeat/logstash.yml
+  FILEBEAT_CONFIG=/opt/filebeat/logstash.yml
 fi
 
 cd /opt/karaf
