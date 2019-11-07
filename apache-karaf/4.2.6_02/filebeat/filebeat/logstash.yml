@@ -41,15 +41,14 @@ processors:
 - add_fields:
   fields:
     server: karaf
-- add_docker_metadata:
-    host: "unix:///var/run/docker.sock"
+    container: ${CONTAINER_ID:unknown}
 #============================== Kibana =====================================
 setup.kibana:
 #================================ Outputs =====================================
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["logserver:5044"]
+  hosts: ["logstash:5000"]
 
 #================================ Logging =====================================
 

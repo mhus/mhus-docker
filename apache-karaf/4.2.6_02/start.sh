@@ -1,10 +1,12 @@
 #!/bin/bash
 
+export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 3|cut -b 1-12`
+
 if [ "x$RUNTIME_ENV" == "x" ]; then
   RUNTIME_ENV=~/.m2/${APP_NAME}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
-  FILEBEAT_CONFIG=/opt/filebeat/logstash.yml
+  FILEBEAT_CONFIG=/docker/filebeat/logstash.yml
 fi
 
 cd /opt/karaf
