@@ -38,6 +38,7 @@ You can access the UI in the browser with http://localhost:35601
 docker run -d -i \
  --link log-elastic:elasticsearch \
  -p 35001:5001 \
+ -v  /tmp/logstash:/logstash \
  --name log-logstash \
  log-logstash
 

@@ -6,7 +6,8 @@ COPY pipeline/logstash.conf /usr/share/logstash/pipeline/
 USER 0
 
 RUN mkdir -p /logstash/files \
-  && chmod 777 /logstash/files
+  && chmod 777 /logstash/files \
+  && touch /logstash/files/info
 
 USER 1000
 
