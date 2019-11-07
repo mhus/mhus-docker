@@ -37,11 +37,13 @@ You can access the UI in the browser with http://localhost:35601
 ```
 docker run -d -i \
  --link log-elastic:elasticsearch \
+ -p 35001:5001 \
  --name log-logstash \
  log-logstash
 
 docker run -d -i \
- -p 5000:5000 \
+ -p 35000:5000 \
+ -p 35001:5001 \
  --link log-elastic:elasticsearch \
  --name log-logstash \
  log-logstash
