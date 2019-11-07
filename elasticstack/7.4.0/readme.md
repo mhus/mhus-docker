@@ -85,3 +85,10 @@ docker rm log-logstash
 docker rm log-kibana
 docker rm log-elastic
 ```
+
+## Misc
+
+https://discuss.elastic.co/t/output-file-configuration/136269
+
+https://www.elastic.co/guide/en/logstash/7.4/event-dependent-configuration.html#conditionals
+
