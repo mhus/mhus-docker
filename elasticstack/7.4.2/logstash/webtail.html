@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tail.js</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <style>
+    body
+      { background-color: black;
+        color: white;
+        font-family: 'Helvetica', sans-serif; font-size: 86%;
+        padding: 2em; }
+    #tail
+      { border: 1px solid #ccc;
+        height: 700px;
+        padding: 0.5em;
+        overflow: hidden;
+        position: relative;
+        overflow-y: scroll; }
+  </style>
+
+</head>
+<body>
+  <pre id="tail"></pre>
+
+  <script language = "javascript" type "text/javascript">
+
+      var wsUri = "ws://localhost:1234";
+      var lines = 0;
+
+      websocket = new WebSocket(wsUri);
+      websocket.onmessage = function(event){
+
+      var logline = "";
+
+      var msg = JSON.parse(event.data, function(key, value){
+
+      switch(key){
+
+        case "message":
+          logline=value;
+
+        case "host":
+          logline+=" ";
+          logline+=value;
+        }
+      });
+      $('#tail').html($('#tail').html() + "<br>" + logline );
+      lines++;
+      $('#tail').scrollTop(lines*100)
+    }
+    </script>
+  </body>
+  </html>
