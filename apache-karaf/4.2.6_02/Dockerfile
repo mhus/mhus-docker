@@ -6,7 +6,7 @@ ENV APP_UID=501
 ARG BUILD_FILEBEAT_VERSION=7.4.0
 ARG BUILD_KARAF_VERSION=4.2.6
 ENV JAVA_MAX_MEM=2048m
-ENV APP_NAME=karaf_playground
+ENV APP_NAME=karaf
 # for jdk9 and above, debug also from other then localhost
 ENV JAVA_DEBUG_PORT=*:5005
 # to shutdown graceful use exec in start script
