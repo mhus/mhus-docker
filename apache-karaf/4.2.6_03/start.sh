@@ -3,11 +3,15 @@
 export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 3|cut -b 1-12`
 
 if [ "x$RUNTIME_ENV" == "x" ]; then
-  RUNTIME_ENV=~/.m2/${APP_NAME}_env.sh
+  RUNTIME_ENV=~/.m2/${APP_NAME}_${CONTAINER_ID}_env.sh
 fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
   FILEBEAT_CONFIG=/docker/filebeat/logstash.yml
 fi
+if [ "x$CONFIG_PROFILE" == "x" ]; then
+  CONFIG_PROFILE=default
+fi
+export CONFIG_PROFILE
 
 cd /opt/karaf
 

@@ -1,14 +1,7 @@
 #!/bin/bash
 cd /opt/karaf
 
-if [ -e /docker/assembly.tar.gz ]; then
-    echo "====================================="
-    echo "Install Assembly"
-    echo "====================================="
-    rm -rf *
-    tar xzvf /docker/assembly.tar.gz
-fi
-if [ -e /docker/deploy/deploy1.gogo ]; then
+if [ -e /docker/deploy/deploy1.gogo ] || [ "x$INSTALL_FORCE" == "x1" ]; then
     echo "====================================="
     echo "Install Features"
     echo "====================================="

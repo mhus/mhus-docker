@@ -5,12 +5,21 @@ if [  ! -z $VARS_FILE -a -e $VARS_FILE ]; then
   . $VARS_FILE
 fi
 
+if [ -e /docker/assembly.tar.gz ]; then
+    echo "- - - - - - - - - - - - - - - - - -"
+    echo "Install Assembly"
+    echo "- - - - - - - - - - - - - - - - - -"
+    cd /opt/karaf
+    rm -rf *
+    tar --strip-components=1 -C /opt/karaf -xzvf /docker/assembly.tar.gz
+fi
+
 IFS=$'\n' read -d '' -r -a folders < /docker/environment_folders.txt
 
-if [ -e /docker/templates/karaf ]; then
+if [ -e /docker/profiles/${CONFIG_PROFILE} ]; then
   echo "- - - - - - - - - - - - - - - - - -"
-  echo "Copy Templates from /templates/karaf to /opt/karaf"
-  cp -r /docker/templates/karaf/* /opt/karaf/
+  echo "Copy profile ${CONFIG_PROFILE} to /opt/karaf"
+  cp -r /docker/profiles/${CONFIG_PROFILE}/* /opt/karaf/
 fi
 
 for folder in "${folders[@]}"; do

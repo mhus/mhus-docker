@@ -15,6 +15,9 @@ ENV KARAF_EXEC="exec"
 RUN set -x \
     && echo ">>> Install linux tools" \
     && apt-get update && apt-get install -y --no-install-recommends sudo jq wget curl less nano psmisc \
+    && echo ">>> Setup" \
+    && mkdir -p /docker/deploy \
+    && mkdir -p /docker/deploy/profiles/default \
     && echo ">>> Install fileabeat" \
     && cd /opt \
     && wget --no-check-certificate -O filebeat.tar.gz https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${BUILD_FILEBEAT_VERSION}-linux-x86_64.tar.gz \
@@ -27,18 +30,14 @@ RUN set -x \
     && url="http://archive.apache.org/dist/karaf/${BUILD_KARAF_VERSION}/apache-karaf-${BUILD_KARAF_VERSION}.tar.gz" \
     && wget -O "/tmp/apache-karaf.tar.gz" "${url}" \
     && mkdir -p /opt/karaf \
-    && tar --strip-components=1 -C /opt/karaf -xzf /tmp/apache-karaf.tar.gz \
-    && rm /tmp/apache-karaf.tar.gz \
-    && mkdir -p /opt/karaf/data /opt/karaf/data/log \
+    && mv /tmp/apache-karaf.tar.gz /docker/assembly.tar.gz \
     && mkdir -p /root/.m2/repository \
     && echo ">>> Cleanup" \
     && rm -r /root/.m2/* \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && echo ">>> Setup" \
-    && mkdir -p /docker/deploy
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
-COPY karaf /opt/karaf/
+COPY karaf /docker/profiles/default
 COPY filebeat /docker
 COPY start.sh /docker
 COPY start2.sh /docker
