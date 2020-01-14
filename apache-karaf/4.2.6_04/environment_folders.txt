@@ -1,0 +1,3 @@
+/opt/karaf/deploy
+/opt/karaf/etc
+/deploy/deploy
