@@ -1,6 +1,6 @@
 ## Features
 
-* apache-karaf 4.2.6
+* apache-karaf 4.2.7
 * open JDK 11.0.5 (https://hub.docker.com/_/openjdk)
 * filebeat 7.4.0
 * Use /docker/deploy[1..n].gogo to deploy features at the first startup or at install time
@@ -12,15 +12,15 @@
 ```
 ./create.sh
 
-docker tag mhus/apache-karaf:4.2.6_04 "mhus/apache-karaf:latest"
+docker tag mhus/apache-karaf:4.2.7_01 "mhus/apache-karaf:latest"
 
-docker push "mhus/apache-karaf:4.2.6_04"
+docker push "mhus/apache-karaf:4.2.7_01"
 docker push "mhus/apache-karaf:latest"
 ```
 
 ## Start karaf
 ```
-docker run -it --name karaf mhus/apache-karaf:4.2.6_04
+docker run -it --name karaf mhus/apache-karaf:4.2.7_01
 ```
 
 
@@ -39,13 +39,13 @@ docker run -it -v /home/user/.m2:/root/.m2 -p 15005:5005 --name karaf apache-kar
 Use the env START_FILEBEAT=1 to activate filebeat. Start the log environment before (see elasticstack)
 
 ```
-docker run -it --link log-logstash:logstash -e "START_FILEBEAT=1" --name karaf mhus/apache-karaf:4.2.6_04
+docker run -it --link log-logstash:logstash -e "START_FILEBEAT=1" --name karaf mhus/apache-karaf:4.2.7_01
 ```
 
 All together
 
 ```
-docker run -it -v /home/user/.m2:/root/.m2 --link log-logstash:fb_logstash -e "START_FILEBEAT=1" -p 15005:5005 --name karaf mhus/apache-karaf:4.2.6_04 debug
+docker run -it -v /home/user/.m2:/root/.m2 --link log-logstash:fb_logstash -e "START_FILEBEAT=1" -p 15005:5005 --name karaf mhus/apache-karaf:4.2.7_01 debug
 ```
 
 ## Start mhus
@@ -63,7 +63,7 @@ feature:install mhu-osgi-base
 To enhance the image you have to create a new Dockerfile and add the first instruction
 
 ```
-FROM mhus/apache-karaf:4.2.6_04
+FROM mhus/apache-karaf:4.2.7_01
 ```
 
 The script starts in five steps
