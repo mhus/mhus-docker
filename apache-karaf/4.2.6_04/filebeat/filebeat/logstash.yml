@@ -39,9 +39,9 @@ setup.template.settings:
 #================================ General =====================================
 processors:
 - add_fields:
-  fields:
-    server: karaf
-    container: ${CONTAINER_ID:unknown}
+    fields:
+      server: karaf
+      container: ${CONTAINER_ID:unknown}
 #============================== Kibana =====================================
 setup.kibana:
 #================================ Outputs =====================================
