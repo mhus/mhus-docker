@@ -8,6 +8,7 @@ if [ -e /docker/assembly.tar.gz ]; then
     rm -rf *
     tar --strip-components=1 -C /opt/karaf -xzvf /docker/assembly.tar.gz
     echo "- - - - - - - - - - - - - - - - - -"
+    cp -rv /docker/profiles/initial/* /opt/karaf/
 fi
 rm environmentdone.mark
 rm deploydone.mark

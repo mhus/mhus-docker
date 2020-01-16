@@ -33,9 +33,10 @@ RUN set -x \
     && echo ">>> Cleanup" \
     && rm -r /root/.m2/* \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY karaf /docker/profiles/default
+COPY karaf /docker/profiles/initial
 COPY filebeat /docker
 COPY start.sh /docker
 COPY start2.sh /docker

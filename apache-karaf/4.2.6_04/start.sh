@@ -1,10 +1,5 @@
 #!/bin/bash
 
-export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 3|cut -b 1-12`
-
-if [ "x$RUNTIME_ENV" == "x" ]; then
-  RUNTIME_ENV=~/.m2/${APP_NAME}_${CONTAINER_ID}_env.sh
-fi
 if [ "x$FILEBEAT_CONFIG" == "x" ]; then
   FILEBEAT_CONFIG=/docker/filebeat/logstash.yml
 fi
@@ -15,18 +10,6 @@ export CONFIG_PROFILE
 
 cd /opt/karaf
 
-if [ -e $RUNTIME_ENV ]; then
-	. $RUNTIME_ENV
-	while [ "x$START_WAIT" == "x1" ]; do
-	  echo "START_WAIT is set ... waiting"
-	  sleep 10
-	  . $RUNTIME_ENV
-	done
-	if [ "x$START_BASH" == "x1" ]; then
-	  /bin/bash
-	  exit
-	fi
-fi
 if [ "x$START_REINSTALL" == "x1" ]; then
   rm assembly.mark
   rm installdone.mark

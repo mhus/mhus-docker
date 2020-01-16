@@ -36,6 +36,7 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 COPY karaf /docker/profiles/default
+COPY karaf /docker/profiles/initial
 COPY filebeat /docker
 COPY start.sh /docker
 COPY start2.sh /docker

@@ -66,7 +66,7 @@ if [ -e /docker/deploy/deploy1.gogo ] || [ "x$DEPLOY_FORCE" == "x1" ]; then
     ./bin/stop
     sleep 5
     cnt=0
-    while [ "$(grep -c Stopping\ JMX\ OSGi\ agent data/log/karaf.log)" = "0" ]; do
+    while [ "$(ps -f|grep java|grep karaf|grep -v grep|grep -c .)" = "1" ]; do
       echo "."
       sleep 5
       let cnt=$cnt+1
