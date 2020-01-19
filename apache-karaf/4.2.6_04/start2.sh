@@ -6,7 +6,7 @@ echo Application: $APP_NAME
 echo Container  : $CONTAINER_ID
 
 if [ "x$RUNTIME_ENV" == "x" ]; then
-  RUNTIME_ENV=~/.m2/${APP_NAME}_${CONTAINER_ID}_env.sh
+  RUNTIME_ENV=/home/user/.m2/${APP_NAME}_${CONTAINER_ID}_env.sh
 fi
 if [ -e $RUNTIME_ENV ]; then
     . $RUNTIME_ENV
@@ -20,6 +20,29 @@ if [ -e $RUNTIME_ENV ]; then
       exit
     fi
 fi
+
+# Hosts
+
+if [ "x$KUBERNETES_SERVICE_HOST" != "x" ]
+then
+  echo "" >> /etc/hosts
+  echo "# kubernetes services" >> /etc/hosts
+  for key in $(compgen -A variable)
+  do
+    if [[ $key == *_SERVICE_HOST ]]
+    then
+      ip=$(eval 'echo "${'"$key"'}"')
+      host=$(echo ${key:0:-13} | awk '{print tolower($0)}')
+      cnt=$(cat /etc/hosts| grep -c " $host ")
+      if [ $cnt -eq 0 ]
+      then
+        echo "$ip     $host " >> /etc/hosts
+      fi
+    fi
+  done
+fi
+
+# User
 
 if [ 0 != $(id -u) ]
 then
