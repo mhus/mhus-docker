@@ -23,7 +23,7 @@ fi
 
 # Hosts
 
-if [ "x$KUBERNETES_SERVICE_HOST" != "x" ]
+if [ "x$SET_K8S_HOSTS" == "x1" -a "x$KUBERNETES_SERVICE_HOST" != "x" ]
 then
   echo "" >> /etc/hosts
   echo "# kubernetes services" >> /etc/hosts
