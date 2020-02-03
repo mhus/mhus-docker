@@ -12,12 +12,14 @@ docker build --build-arg UID=501 -t log-filebeat filebeat
 docker run -d -i \
  -e "discovery.type=single-node" \
  --name log-elastic \
+ -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
  docker.elastic.co/elasticsearch/elasticsearch:7.4.2
 
 docker run -d -i \
  -p 9200:9200 \
  -p 9300:9300 \
  -e "discovery.type=single-node" \
+ -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
  --name log-elastic \
  docker.elastic.co/elasticsearch/elasticsearch:7.4.2
 
@@ -40,14 +42,14 @@ docker run -d -i \
  -p 35001:5001 \
  -v  /tmp/logstash:/logstash \
  --name log-logstash \
- log-logstash
+ mhus/log-logstash:7.4.2
 
 docker run -d -i \
  -p 35000:5000 \
  -p 35001:5001 \
  --link log-elastic:elasticsearch \
  --name log-logstash \
- log-logstash
+ mhus/log-logstash:7.4.2
 ```
 ### Start a filebeat
 
