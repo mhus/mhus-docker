@@ -2,7 +2,6 @@
 
 * apache-karaf 4.2.6
 * open JDK 11.0.5 (https://hub.docker.com/_/openjdk)
-* filebeat 7.4.0
 * Use /docker/deploy[1..n].gogo to deploy features at the first startup or at install time
 * Use /docker/assembly.tar.gz as karaf distribution
 * Define multiple profiles in /docker/profiles
@@ -26,7 +25,6 @@ docker run -it --name karaf mhus/apache-karaf:4.2.6_04
 
 ### Options
 
-* -e "START_FILEBEAT=1" - Start filebeat
 * -p 15005:5005 ... debug - Start in debug mode and open debug port at 15005
 * -v /home/user/.m2:/root/.m2 - Share user local repository with karaf container
 

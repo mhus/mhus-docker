@@ -1,7 +1,11 @@
 #!/bin/bash
 
-export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 3|cut -b 1-12`
-
+if [ -z "$CONTAINER_ID"]; then
+    export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 3|cut -b 1-12`
+    if [ "x$CONTAINER_ID" = "xkubepods" ]; then
+        export CONTAINER_ID=`cat /proc/self/cgroup|grep memory| cut -d / -f 5|cut -d \- -f 1`
+    fi
+fi
 echo Application: $APP_NAME
 echo Container  : $CONTAINER_ID
 
@@ -15,10 +19,10 @@ if [ -e $RUNTIME_ENV ]; then
       sleep 10
       . $RUNTIME_ENV
     done
-    if [ "x$START_BASH" == "x1" ]; then
-      /bin/bash
-      exit
-    fi
+fi
+if [ "x$START_BASH" == "x1" ]; then
+  /bin/bash
+  exit
 fi
 
 # Hosts
@@ -66,7 +70,14 @@ if [ "x$UPDATE_OWNER" == "x1" ]
 then
   echo ">>> Update owner of files"
   chown -R user:user /opt/karaf
-  chown -R user:user /opt/filebeat/data
+fi
+
+# need to set every time (if exists and is shared with other container)
+if [ -e  /opt/karaf/data/log ]
+then
+    chown user:user /opt/karaf
+    chown user:user /opt/karaf/data
+    chown user:user /opt/karaf/data/log
 fi
 
 exec runuser user $@

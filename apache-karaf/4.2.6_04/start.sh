@@ -1,8 +1,5 @@
 #!/bin/bash
 
-if [ "x$FILEBEAT_CONFIG" == "x" ]; then
-  FILEBEAT_CONFIG=/docker/filebeat/logstash.yml
-fi
 if [ "x$CONFIG_PROFILE" == "x" ]; then
   CONFIG_PROFILE=default
 fi
@@ -14,14 +11,6 @@ if [ "x$START_REINSTALL" == "x1" ]; then
   rm assembly.mark
   rm installdone.mark
   rm environmentdone.mark
-fi
-if [ "x$START_FILEBEAT" == "x1" ]; then
-    echo "-------------------------------------"
-    echo "Start Filebeat"
-    echo "-------------------------------------"
-  cd /opt/filebeat
-  /opt/filebeat/filebeat -e -c $FILEBEAT_CONFIG &
-  sleep 1
 fi
 
 # prepare karaf

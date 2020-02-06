@@ -3,7 +3,6 @@ MAINTAINER Mike Hummel <mh@mhus.de>
 
 ENV APP_UID=501
 
-ARG BUILD_FILEBEAT_VERSION=7.4.0
 ARG BUILD_KARAF_VERSION=4.2.6
 ENV JAVA_MAX_MEM=2048m
 ENV APP_NAME=karaf
@@ -16,13 +15,6 @@ RUN set -x \
     && echo ">>> Setup" \
     && mkdir -p /docker/deploy \
     && mkdir -p /docker/deploy/profiles/default \
-    && echo ">>> Install fileabeat" \
-    && cd /opt \
-    && wget --no-check-certificate -O filebeat.tar.gz https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${BUILD_FILEBEAT_VERSION}-linux-x86_64.tar.gz \
-    && tar xzvf filebeat.tar.gz \
-    && rm filebeat.tar.gz \
-    && mv filebeat-${BUILD_FILEBEAT_VERSION}-linux-x86_64 filebeat \
-    && touch filebeat/filebeat-${BUILD_FILEBEAT_VERSION}-linux-x86_64.version \
     && cd / \
     && echo ">>> Download and install karaf" \
     && url="http://archive.apache.org/dist/karaf/${BUILD_KARAF_VERSION}/apache-karaf-${BUILD_KARAF_VERSION}.tar.gz" \
@@ -37,7 +29,6 @@ RUN set -x \
 
 COPY karaf /docker/profiles/default
 COPY karaf /docker/profiles/initial
-COPY filebeat /docker
 COPY start.sh /docker
 COPY start2.sh /docker
 COPY deploy.sh /docker
@@ -55,9 +46,7 @@ RUN set -x \
     && chmod ugo+x /docker/start2.sh \
     && chown -R user:user /opt/karaf \
     && mkdir -p /home/user/.m2/repository \
-    && chown -R user:user /home/user/.m2 \
-    && mkdir /opt/filebeat/data \
-    && chown -R user:user /opt/filebeat/data
+    && chown -R user:user /home/user/.m2
 
 EXPOSE 8181
 
