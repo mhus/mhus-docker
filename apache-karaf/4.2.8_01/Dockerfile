@@ -3,7 +3,7 @@ MAINTAINER Mike Hummel <mh@mhus.de>
 
 ENV APP_UID=501
 
-ARG BUILD_KARAF_VERSION=4.2.7
+ARG BUILD_KARAF_VERSION=4.2.8
 ENV JAVA_MAX_MEM=2048m
 ENV APP_NAME=karaf
 # for jdk9 and above, debug also from other then localhost
@@ -25,7 +25,7 @@ RUN set -x \
     && echo ">>> Cleanup" \
     && rm -r /root/.m2/* \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY karaf /docker/profiles/default
 COPY karaf /docker/profiles/initial
