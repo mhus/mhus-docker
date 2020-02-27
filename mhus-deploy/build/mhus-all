@@ -1,0 +1,17 @@
+#!/bin/bash
+. _init.sh
+mhus-parent  $@ || exit 1
+mhus-lib  $@ || exit 1
+mhus-constgenerator  $@ || exit 1
+mhus-faqgenerator  $@ || exit 1
+mhus-ports  $@ || exit 1
+mhus-osgi-tools  $@ || exit 1
+mhus-osgi-crypt  $@ || exit 1
+mhus-osgi-servlets  $@ || exit 1
+mhus-transform  $@ || exit 1
+mhus-vaadin  $@ || exit 1
+mhus-sop  $@ || exit 1
+cherry-web  $@ || exit 1
+cherry-vault  $@ || exit 1
+cherry-reactive  $@ || exit 1
+. _done.sh

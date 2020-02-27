@@ -1,15 +1,22 @@
 #!/bin/bash
 
-VERSION=11.0
+VERSION=12
+REPOSITORY=mhus/mhus-deploy
 
-if [ ! -e Dockerfile ]
-then
-  echo "Not in build directory"
-  exit 1
+if [  ! -f Dockerfile ]; then
+  echo "not a docker configuration"
+  return 1
 fi
 
+
 if [ "$1" = "clean" ]; then
-	docker build --no-cache -t mhus/mhus-deploy:$VERSION .
+    shift
+    docker rmi $REPOSITORY:$VERSION
+    docker build --no-cache -t $REPOSITORY:$VERSION .
 else
-	docker build -t mhus/mhus-deploy:$VERSION .
-fi	
+    docker build -t $REPOSITORY:$VERSION .
+fi
+
+if [ "$1" = "push" ]; then
+    docker push "$REPOSITORY:$VERSION"
+fi 
