@@ -1,0 +1,8 @@
+#!/bin/bash
+. _init.sh
+
+mhus-constgenerator $@ || exit 1
+mhus-osgi-tools $@ || exit 1
+
+_repo.sh mhus-micro https://github.com/mhus/mhus-micro.git $@ || exit 1
+. _done.sh

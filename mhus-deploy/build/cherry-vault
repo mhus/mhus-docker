@@ -1,5 +1,6 @@
 #!/bin/bash
 . _init.sh
+mhus-rest $@ || exit 1
 mhus-osgi-crypt $@ || exit 1
 mhus-ports $@ || exit 1
 

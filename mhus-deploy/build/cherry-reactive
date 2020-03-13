@@ -1,6 +1,6 @@
 #!/bin/bash
 . _init.sh
-mhus-sop $@ || exit 1
+mhus-rest $@ || exit 1
 mhus-transform $@ || exit 1
 mhus-ports $@ || exit 1
 mhus-vaadin $@ || exit 1

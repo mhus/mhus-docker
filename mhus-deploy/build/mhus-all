@@ -10,7 +10,8 @@ mhus-osgi-crypt  $@ || exit 1
 mhus-osgi-servlets  $@ || exit 1
 mhus-transform  $@ || exit 1
 mhus-vaadin  $@ || exit 1
-mhus-sop  $@ || exit 1
+mhus-rest $@ || exit 1
+mhus-micro $@ || exit 1
 cherry-web  $@ || exit 1
 cherry-vault  $@ || exit 1
 cherry-reactive  $@ || exit 1
