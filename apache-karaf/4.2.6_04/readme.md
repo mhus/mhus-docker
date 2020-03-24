@@ -31,7 +31,7 @@ docker run -it --name karaf mhus/apache-karaf:4.2.6_04
 Examples:
 
 ```
-docker run -it -v /home/user/.m2:/root/.m2 -p 15005:5005 --name karaf apache-karaf debug
+docker run -it -v ~/.m2:/home/user/.m2 -p 15005:5005 -p 18181:8181 --name karaf mhus/apache-karaf:4.2.6_04 debug
 ```
 
 Use the env START_FILEBEAT=1 to activate filebeat. Start the log environment before (see elasticstack)
