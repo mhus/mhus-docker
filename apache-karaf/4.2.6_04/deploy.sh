@@ -14,7 +14,7 @@ if [ -e /docker/deploy/deploy1.gogo ] || [ "x$DEPLOY_FORCE" == "x1" ]; then
     echo "Start karaf in background"
     echo "-------------------------------------"
     ./bin/start
-    sleep 5
+    sleep 10
     (tail -f data/log/karaf.log) &
     while [ "$(grep -c Done data/log/karaf.log)" = "0" ]; do
       echo "."
