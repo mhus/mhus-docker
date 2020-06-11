@@ -18,7 +18,7 @@ Simple command to start the container:
 ```
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
- mhus/mhus-deploy:11.0
+ mhus/mhus-deploy:11.2
 ```
 
 The command will start the container and you can start compiling. Before you start 
@@ -30,7 +30,7 @@ Therefore you should share the local maven directory with the host/others.
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -v ~/m2:/home/user/.m2 \
- mhus/mhus-deploy:11.0
+ mhus/mhus-deploy:11.2
 ```
 
 You can also share the deploy folder to store the downloaded sources in a persistent 
@@ -46,7 +46,7 @@ docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -v $DATA/m2:/home/user/.m2 \
  -v $DATA/deploy:/home/user/deploy \
- mhus/mhus-deploy:11.0
+ mhus/mhus-deploy:11.2
 ```
 
 The last example uses a central directory for packages and also for sources.
@@ -61,7 +61,7 @@ A common user id is also 1000:
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
  -e APP_UID=1000 \
- mhus/mhus-deploy:11.0
+ mhus/mhus-deploy:11.2
 ```
 
 ## Usage
@@ -115,7 +115,7 @@ And now start the deploy container and link it to the sonar server:
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
  --link sonarqube:sonarserver \
- mhus/mhus-deploy:11.0
+ mhus/mhus-deploy:11.2
 ```
 
 Now you can start sending your files to the server using maven, e.g. for mhus-sop:
@@ -149,7 +149,7 @@ RUN set -x \
 
 ## Push
 ```
-docker push "mhus/mhus-deploy:11.0"
-docker tag mhus/mhus-deploy:11.0 "mhus/mhus-deploy:latest"
+docker push "mhus/mhus-deploy:11.2"
+docker tag mhus/mhus-deploy:11.2 "mhus/mhus-deploy:latest"
 docker push "mhus/mhus-deploy:latest"
 ```
