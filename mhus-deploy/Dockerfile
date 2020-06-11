@@ -1,4 +1,4 @@
-FROM openjdk:11.0.2-jdk
+FROM openjdk:11.0.7-jdk
 MAINTAINER Mike Hummel
 
 ENV APP_UID=501
