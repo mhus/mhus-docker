@@ -1,0 +1,24 @@
+
+This docker project is a fork of https://github.com/liferay/liferay-docker. It will execute the
+build process in a separate docker image. So the build of the liferay image is independent of
+the installed java version.
+
+Start the create script with the url to the liferay package
+
+----
+
+./create files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-tomcat-7.2.10-ga1-20190531140450482.7z
+
+----
+
+It's also possible to give a file in the user home. You have to set the relative path from user home. The script will
+mount the user home and try to use the file.
+
+----
+
+./create.sh Shared/Liferay/liferay-ce-portal-tomcat-7.0-ga4-20170613175008905.zip
+
+----
+
+Will create a liferay with base file in `/home/user/Shared/Liferay/liferay-ce-portal-tomcat-7.0-ga4-20170613175008905.zip`.
+
