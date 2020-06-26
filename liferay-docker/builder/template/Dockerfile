@@ -49,6 +49,11 @@ LABEL org.label-schema.vcs-url="${LABEL_VCS_URL}"
 LABEL org.label-schema.vendor="Liferay, Inc."
 LABEL org.label-schema.version="${LABEL_VERSION}"
 
+RUN set +x \
+ && chmod +x /usr/local/bin/liferay_entrypoint.sh \
+ && chmod +x /usr/local/bin/configure_liferay.sh \
+ && chmod +x /usr/local/bin/start_liferay.sh
+
 USER liferay:liferay
 
 WORKDIR /opt/liferay
