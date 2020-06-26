@@ -6,7 +6,7 @@ ARG LABEL_VCS_REF
 ARG LABEL_VCS_URL
 ARG LABEL_VERSION
 
-RUN apk --no-cache add bash curl nss tomcat-native tree ttf-dejavu zulu11-jdk=11.0.5-r3
+RUN apk --no-cache add bash curl nss tomcat-native tree ttf-dejavu zulu11-jdk=11.0.5-r3 busybox-extras
 
 COPY scripts/* /usr/local/bin/
 
@@ -50,9 +50,7 @@ LABEL org.label-schema.vendor="Liferay, Inc."
 LABEL org.label-schema.version="${LABEL_VERSION}"
 
 RUN set +x \
- && chmod +x /usr/local/bin/liferay_entrypoint.sh \
- && chmod +x /usr/local/bin/configure_liferay.sh \
- && chmod +x /usr/local/bin/start_liferay.sh
+ && chmod +x /usr/local/bin/*.sh 
 
 USER liferay:liferay
 

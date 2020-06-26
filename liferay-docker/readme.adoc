@@ -1,7 +1,11 @@
 
-This docker project is a fork of https://github.com/liferay/liferay-docker. It will execute the
+== Overview
+
+This docker project is a fork of `https://github.com/liferay/liferay-docker`. It will execute the
 build process in a separate docker image. So the build of the liferay image is independent of
 the installed java version.
+
+== Start
 
 Start the create script with the url to the liferay package
 
@@ -10,6 +14,8 @@ Start the create script with the url to the liferay package
 ./create files.liferay.com/private/ee/portal/7.2.10/liferay-dxp-tomcat-7.2.10-ga1-20190531140450482.7z
 
 ----
+
+== Liferay image sources
 
 It's also possible to give a file in the user home. You have to set the relative path from user home. The script will
 mount the user home and try to use the file.
@@ -21,4 +27,15 @@ mount the user home and try to use the file.
 ----
 
 Will create a liferay with base file in `/home/user/Shared/Liferay/liferay-ce-portal-tomcat-7.0-ga4-20170613175008905.zip`.
+
+== Mount
+
+Mount a directory into /mnt/liferay to import files from your environment into liferay.
+
+The following directories will be used
+
+* deploy: If the directory exists it will be used instead of the original deploy directory. You are able to copy files in runtime to this directory.
+* deploy-static: The files in this directory will be copied in the deploy directory for each start. Changes after startup will have no effect.
+* scripts: All scripts in the container directory /mnt/liferay/scripts will be executed before before Liferay Portal starts. 
+* files: All files will be copied in the liferay home folder
 
