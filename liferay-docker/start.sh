@@ -12,6 +12,8 @@ fi
 echo "URL: $LIFERAY_DOCKER_RELEASE_FILE_URL"
 export LIFERAY_DOCKER_RELEASE_FILE_URL
 
-./build_image.sh
+shift
+
+./build_image.sh $@
 
 # bash
