@@ -121,10 +121,10 @@ function build_docker_image {
 		if [[ ${LIFERAY_DOCKER_RELEASE_FILE_URL%} == */snapshot-* ]]
 		then
 			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_branch}-${release_version_single}-${release_hash}")
-			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_branch}-$(date "${CURRENT_DATE}" "+%Y%m%d")")
+#			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_branch}-$(date "${CURRENT_DATE}" "+%Y%m%d")")
 			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_branch}")
 		else
-			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_version_single}-${TIMESTAMP}")
+#			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_version_single}-${TIMESTAMP}")
 			DOCKER_IMAGE_TAGS+=("mhus/${docker_image_name}:${release_version_single}")
 		fi
 	done
