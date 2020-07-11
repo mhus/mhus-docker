@@ -29,7 +29,7 @@ Therefore you should share the local maven directory with the host/others.
 ```
 docker run -it --name mhus-deploy \
  -h deploy-mhus \
- -v ~/m2:/home/user/.m2 \
+ -v ~/.m2:/home/user/.m2 \
  mhus/mhus-deploy:11.2
 ```
 

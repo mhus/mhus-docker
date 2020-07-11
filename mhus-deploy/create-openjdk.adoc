@@ -1,0 +1,35 @@
+
+
+Download from Oracle jdk-11.0.7_linux-x64_bin.tar.gz 
+into home directory.
+
+----
+
+git clone https://github.com/oracle/docker-images.git
+cd docker-images/OracleJava/java-11/
+cp ~/jdk-11.0.7_linux-x64_bin.tar.gz .
+sh build.sh
+
+----
+
+Start container and install needed tools:
+
+----
+
+docker run -it --name mhus-deploy \
+ -h deploy-mhus \
+ --entrypoint=/bin/bash \
+ oracle/jdk:11
+ 
+yum -y install git wget
+
+wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar xvf apache-maven-3.6.3-bin.tar.gz
+mv apache-maven-3.6.3  /usr/local/apache-maven
+
+export M2_HOME=/usr/local/apache-maven
+export M2=$M2_HOME/bin 
+export PATH=$M2:$PATH
+
+----
+
