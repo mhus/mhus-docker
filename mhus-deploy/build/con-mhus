@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd /home/user/deploy/
+if [ ! -e mhus-parent ]; then
+    git clone https://github.com/mhus/mhus-parent.git || exit 1
+    cd mhus-parent
+    con git.pull
+else
+  cd mhus-parent
+fi
+
+con $@
