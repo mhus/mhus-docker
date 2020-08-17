@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=11.2
+VERSION=11.3
 REPOSITORY=mhus/mhus-deploy
 
 if [  ! -f Dockerfile ]; then
