@@ -13,12 +13,12 @@ else
 fi
 id
 
-export PATH=/home/user/build:$PATH
+export PATH=/home/user/bin:$PATH
 
 #runuser user "git config --global credential.helper store"
 
 alias ll='ls -l'
 
 cd /home/user
-chmod +x build/*
+chmod +x bin/*
 exec runuser user $@

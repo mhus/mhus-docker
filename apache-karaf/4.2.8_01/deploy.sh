@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /opt/karaf
 
-if [ -e /docker/deploy/deploy1.gogo ] || [ "x$DEPLOY_FORCE" == "x1" ]; then
+if [ -e /docker/deploy/deploy1.gogo ] || [ "x$BUILD_FORCE" == "x1" ]; then
     echo "====================================="
     echo "Deploy Features"
     echo "====================================="

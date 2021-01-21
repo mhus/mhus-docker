@@ -84,10 +84,10 @@ in your Dockerfile you can execute these steps to prepare for a fast start. It m
 
 ```
 RUN /docker/assembly.sh
-RUN export DEPLOY_FORCE=1 && /docker/deploy.sh
+RUN export BUILD_FORCE=1 && /docker/deploy.sh
 ```
 
-Environment will be done after start of the container. It depends of the given environment. The environment 'DEPLOY_FORCE=1' will force the start of karaf even if no deploy file is given in /docker/deploy
+Environment will be done after start of the container. It depends of the given environment. The environment 'BUILD_FORCE=1' will force the start of karaf even if no deploy file is given in /docker/deploy
 
 
 ## Profiles

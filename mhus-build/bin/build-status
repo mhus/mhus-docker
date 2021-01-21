@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo export BUILD_MAVEN_NOT_QUIT=$BUILD_MAVEN_NOT_QUIT
+echo export BUILD_GIT_NOT_QUIT=$BUILD_GIT_NOT_QUIT
+echo
+echo export BUILD_MAVEN_DISABLED=$BUILD_MAVEN_DISABLED
+echo export BUILD_GIT_DISABLED=$BUILD_GIT_DISABLED
+echo
+cd /home/user
+for i in $(ls deploy/); do
+  if [ -e retry/$i ]; then
+    echo REPO $i RETRY
+  else
+    echo REPO $i DONE
+  fi
+done

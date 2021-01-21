@@ -16,8 +16,8 @@ Start container and install needed tools:
 
 ----
 
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
+docker run -it --name mhus-build \
+ -h build-mhus \
  --entrypoint=/bin/bash \
  oracle/jdk:11
  

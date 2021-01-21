@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/user/deploy/
+cd /home/user/build/
 if [ ! -e mhus-parent ]; then
     git clone https://github.com/mhus/mhus-parent.git || exit 1
     cd mhus-parent

@@ -8,7 +8,7 @@ it will stop on error.
 
 ## Environment
 
-The deploy image 11.x uses an openjdk 11 to deploy the projects. Currently it supports 
+The build image 11.x uses an openjdk 11 to build the projects. Currently it supports 
 maven 3 and git.
 
 ## Start the container
@@ -16,9 +16,9 @@ maven 3 and git.
 Simple command to start the container:
 
 ```
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
- mhus/mhus-deploy:11.2
+docker run -it --name mhus-build \
+ -h build-mhus \
+ mhus/mhus-build:11.0.7
 ```
 
 The command will start the container and you can start compiling. Before you start 
@@ -27,26 +27,26 @@ think about maven configuration and contribution of the compiled artifacts.
 Therefore you should share the local maven directory with the host/others.
 
 ```
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
+docker run -it --name mhus-build \
+ -h build-mhus \
  -v ~/.m2:/home/user/.m2 \
- mhus/mhus-deploy:11.2
+ mhus/mhus-build:11.0.7
 ```
 
-You can also share the deploy folder to store the downloaded sources in a persistent 
+You can also share the build folder to store the downloaded sources in a persistent 
 place.
 
 ```
-DATA=/mnt/storage/deploy
+DATA=/mnt/storage/build
 
 mkdir -p $DATA/m2
-mkdir -p $DATA/deploy
+mkdir -p $DATA/build
 
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
+docker run -it --name mhus-build \
+ -h build-mhus \
  -v $DATA/m2:/home/user/.m2 \
- -v $DATA/deploy:/home/user/deploy \
- mhus/mhus-deploy:11.2
+ -v $DATA/build:/home/user/build \
+ mhus/mhus-build:11.0.7
 ```
 
 The last example uses a central directory for packages and also for sources.
@@ -58,10 +58,10 @@ users id set the environment variable -e APP_UID=1234 to another user id. Do not
 A common user id is also 1000:
 
 ```
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
+docker run -it --name mhus-build \
+ -h build-mhus \
  -e APP_UID=1000 \
- mhus/mhus-deploy:11.2
+ mhus/mhus-build:11.0.7
 ```
 
 ## Usage
@@ -76,24 +76,24 @@ manually.
 If you execute the scripts give the maven goals as parameters, e.g. 'mhus-lib install'. 
 
 The script will compile only once until the source is changed. If you need to compile 
-a single project or all again use the command deploy-retry [repo]. With deploy-status 
+a single project or all again use the command build-retry [repo]. With build-status 
 you can check the status of the existing repositories.
 
-With 'deploy-status' you see also environment variable values. With the values you 
-can control the deployment.
+With 'build-status' you see also environment variable values. With the values you 
+can control the buildment.
 
 If you want to clean all 'mhus-sop' repositories execute:
 
 ```
-deploy-retry
+build-retry
 mhus-sop clean
 ```
 
 If you get an error from maven and the execution stops you should set
 
 ```
-export DEPLOY_MAVEN_NOT_QUIT=1
-deploy-retry
+export BUILD_MAVEN_NOT_QUIT=1
+build-retry
 mhus-sop clean
 ```
 
@@ -109,13 +109,13 @@ docker run -d --name sonarqube -p 9000:9000 sonarqube
 
 Read the sonar documentation for detailed configuration: https://hub.docker.com/_/sonarqube
 
-And now start the deploy container and link it to the sonar server:
+And now start the build container and link it to the sonar server:
 
 ```
-docker run -it --name mhus-deploy \
- -h deploy-mhus \
+docker run -it --name mhus-build \
+ -h build-mhus \
  --link sonarqube:sonarserver \
- mhus/mhus-deploy:11.2
+ mhus/mhus-build:11.0.7
 ```
 
 Now you can start sending your files to the server using maven, e.g. for mhus-sop:
@@ -129,17 +129,17 @@ mhus-sop sonar:sonar -Dsonar.host.url=http://sonarserver:9000
 
 ## Remove
 ```
-docker stop mhus-deploy
-docker rm mhus-deploy
-docker rmi mhus-deploy
+docker stop mhus-build
+docker rm mhus-build
+docker rmi mhus-build
 ```
 
 ## Extend
 
-To add more deploy scripts you need to create your own Dockerfile and inherit this container image. Copy the additional build scripts in the build folder
+To add more build scripts you need to create your own Dockerfile and inherit this container image. Copy the additional build scripts in the build folder
 
 ```
-FROM mhus/mhus-deploy
+FROM mhus/mhus-build
 
 COPY build /home/user/build/
 
@@ -149,7 +149,7 @@ RUN set -x \
 
 ## Push
 ```
-docker push "mhus/mhus-deploy:11.2"
-docker tag mhus/mhus-deploy:11.2 "mhus/mhus-deploy:latest"
-docker push "mhus/mhus-deploy:latest"
+docker push "mhus/mhus-build:11.0.7"
+docker tag mhus/mhus-build:11.0.7 "mhus/mhus-build:latest"
+docker push "mhus/mhus-build:latest"
 ```

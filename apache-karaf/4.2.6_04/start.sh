@@ -37,8 +37,8 @@ fi
 cd /opt/karaf
 if [ ! "x$PREVENT_DEPLOY" == "x1" -a ! -e deploydone.mark ]; then
     /docker/deploy.sh
-    if [  -e /docker/deploy_custom.sh ]; then
-      /docker/deploy_custom.sh
+    if [  -e /docker/BUILD_custom.sh ]; then
+      /docker/BUILD_custom.sh
     fi
 fi
 

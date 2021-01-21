@@ -18,9 +18,9 @@ for dir in */; do
     git reset --hard HEAD
     git pull
   fi
-  if [ -x deploy-selfupdate.sh ]; then
-    echo "Execute deploy-selfupdate.sh"
-    ./deploy-selfupdate.sh
+  if [ -x build-selfupdate.sh ]; then
+    echo "Execute build-selfupdate.sh"
+    ./build-selfupdate.sh
   fi
   cd ..
 done

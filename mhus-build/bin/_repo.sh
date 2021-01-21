@@ -10,7 +10,7 @@ function mavenQuit {
     echo "##############################"
     echo "## Maven Failed: $1"
     echo "##############################"
-    if [ "x$DEPLOY_MAVEN_NOT_QUIT" = "x1" ]; then
+    if [ "x$BUILD_MAVEN_NOT_QUIT" = "x1" ]; then
         echo Ignore Maven Error
         echo "##############################"
         return
@@ -22,7 +22,7 @@ function gitQuit {
     echo "##############################"
     echo "## Git Failed: $1"
     echo "##############################"
-    if [ "x$DEPLOY_GIT_NOT_QUIT" = "x1" ]; then
+    if [ "x$BUILD_GIT_NOT_QUIT" = "x1" ]; then
         echo Ignore Git Error
         echo "##############################"
         return
@@ -36,7 +36,7 @@ then
     exit 0
 fi
 
-cd /home/user/deploy
+cd /home/user/build
 
 echo "==============================="
 echo " ${name}"
@@ -49,7 +49,7 @@ if [ ! -d $name ]; then
   echo "----------------------------------"
   echo " Clone $url $name"
   echo "----------------------------------"
-  if [ "x$DEPLOY_GIT_DISABLED" = "x1" ]; then
+  if [ "x$BUILD_GIT_DISABLED" = "x1" ]; then
       gitQuit clone_disabled
   else
     git clone $url $name || gitQuit clone
@@ -58,12 +58,12 @@ if [ ! -d $name ]; then
   echo "----------------------------------"
   echo " maven $@"
   echo "----------------------------------"
-  if [ "x$DEPLOY_MAVEN_DISABLED" != "x1" ]; then
+  if [ "x$BUILD_MAVEN_DISABLED" != "x1" ]; then
     mvn $@ || mavenQuit
   fi
 else
   cd $name
-  if [ "x$DEPLOY_GIT_DISABLED" = "x1" ]; then
+  if [ "x$BUILD_GIT_DISABLED" = "x1" ]; then
     uptodate=1
   else
     git remote update
@@ -80,11 +80,11 @@ else
     echo "----------------------------------"
     echo " maven $@"
     echo "----------------------------------"
-    if [ "x$DEPLOY_GIT_DISABLED" != "x1" ]; then
+    if [ "x$BUILD_GIT_DISABLED" != "x1" ]; then
       git reset --hard HEAD
       git pull || gitQuit pull
     fi
-    if [ "x$DEPLOY_MAVEN_DISABLED" != "x1" ]; then
+    if [ "x$BUILD_MAVEN_DISABLED" != "x1" ]; then
         mvn $@ || mavenQuit
     fi
   fi
