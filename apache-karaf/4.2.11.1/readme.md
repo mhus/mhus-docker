@@ -40,7 +40,6 @@ Start the container sharing the local repository. If you have compiled a SNAPSHO
 
 ```
 version=7.4.0-SNAPSHOT
-feature:repo-add mvn:org.apache.shiro/shiro-features/1.6.0/xml/features
 feature:repo-add mvn:de.mhus.osgi/mhus-features/$version/xml/features
 feature:install mhu-base
 ```
