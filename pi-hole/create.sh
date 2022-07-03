@@ -2,7 +2,7 @@
 
 VERSION=2022.05
 REPOSITORY=mhus/pihole
-V=$VERSION
+V=$VERSION-$(uname -m)
 
 if [  ! -f Dockerfile ]; then
   echo "not a docker configuration"
@@ -25,4 +25,4 @@ if [ "$1" = "push" ]; then
     docker push "$REPOSITORY:$V"
     docker push "$REPOSITORY:$VERSION"
     docker push "$REPOSITORY:latest"
-fi 
+fi
